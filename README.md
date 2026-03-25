@@ -214,6 +214,7 @@ Installed automatically if missing:
 
 | Tool | Command | Description |
 |------|---------|-------------|
+| Cortex Code CLI | `cortex` | Snowflake Cortex AI coding assistant for the terminal |
 | Claude Code | `claude` | Anthropic's AI coding assistant for the terminal |
 
 ### MCP Servers

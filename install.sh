@@ -187,6 +187,21 @@ else
 fi
 
 # ------------------------------------------------------------
+# Snowflake Cortex Code CLI (npm)
+# ------------------------------------------------------------
+info "Checking Cortex Code CLI"
+if command_exists cortex; then
+    ok "Already installed"
+else
+    info "Installing Cortex Code CLI via npm..."
+    if command_exists npm; then
+        npm install -g @snowflake-labs/cortex-cli || warn "Failed to install Cortex Code CLI"
+    else
+        fail "npm not found - install Node.js first, then run: npm install -g @snowflake-labs/cortex-cli"
+    fi
+fi
+
+# ------------------------------------------------------------
 # Claude Code (npm)
 # ------------------------------------------------------------
 info "Checking Claude Code"
