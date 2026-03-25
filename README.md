@@ -41,6 +41,9 @@ Installed automatically if missing:
 
 | Tool | Command | Description |
 |------|---------|-------------|
+| unixODBC | `odbcinst` | ODBC driver manager — required for Dataverse and SQL Server connections |
+| Microsoft ODBC Driver 18 | — | ODBC driver for SQL Server and Dataverse TDS endpoint |
+| mssql-tools18 | `sqlcmd`, `bcp` | SQL Server command-line tools for queries and bulk data operations |
 | DuckDB | `duckdb` | In-process analytical SQL database for fast local querying |
 | dbt Cloud CLI | `dbt` | Build, test, and manage dbt data transformation projects |
 | jq | `jq` | Lightweight command-line JSON processor |
@@ -94,6 +97,7 @@ Installed automatically if missing:
 | quicklook-json | Quicklook plugin — formatted JSON preview in Finder with spacebar |
 | Slack | Team messaging and communication |
 | Microsoft Teams | Microsoft collaboration and video conferencing |
+| Raycast | Spotlight replacement — launcher, snippets, clipboard history, and extensions |
 | Microsoft OneDrive | Cloud file storage and sync for Microsoft 365 |
 | Google Drive | Cloud file storage and sync for Google Workspace |
 | Logitech G Hub | Configuration software for Logitech peripherals |

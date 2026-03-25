@@ -6,6 +6,7 @@
 # ------------------------------------------------------------
 # Taps
 # ------------------------------------------------------------
+tap "microsoft/mssql-release"
 tap "databricks/tap"
 tap "dbt-labs/dbt-cli"
 
@@ -21,6 +22,9 @@ brew "terraform"                    # Infrastructure as code
 # ------------------------------------------------------------
 # CLI Tools - Data
 # ------------------------------------------------------------
+brew "unixodbc"                     # ODBC driver manager
+brew "microsoft/mssql-release/msodbcsql18"  # Microsoft ODBC Driver 18 for SQL Server
+brew "microsoft/mssql-release/mssql-tools18" # SQL Server command-line tools (sqlcmd, bcp)
 brew "duckdb"                       # DuckDB CLI
 brew "jq"                           # JSON processor
 brew "yq"                           # YAML processor
@@ -66,6 +70,7 @@ cask "slack"                        # Slack messaging
 cask "microsoft-teams"              # Microsoft Teams
 cask "onedrive"                     # Microsoft OneDrive
 cask "google-drive"                 # Google Drive
+cask "raycast"                      # Spotlight replacement and launcher
 cask "logitech-g-hub"              # Logitech G Hub
 cask "claude"                       # Claude Desktop
 

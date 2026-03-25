@@ -201,6 +201,26 @@ defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 ok "Text input: auto-correct, auto-capitalize, and period substitution off"
 
+# Hot corners
+# Values: 0=none, 2=Mission Control, 3=App Windows, 4=Desktop,
+#         5=Screen Saver, 6=Disable Screen Saver, 10=Put Display to Sleep,
+#         11=Launchpad, 12=Notification Center, 13=Lock Screen, 14=Quick Note
+# Modifiers: 0=none, 131072=Shift, 262144=Control, 524288=Option, 1048576=Cmd
+defaults write com.apple.dock wvous-tl-corner -int 13
+defaults write com.apple.dock wvous-tl-modifier -int 524288
+defaults write com.apple.dock wvous-tr-corner -int 2
+defaults write com.apple.dock wvous-tr-modifier -int 0
+defaults write com.apple.dock wvous-bl-corner -int 4
+defaults write com.apple.dock wvous-bl-modifier -int 0
+defaults write com.apple.dock wvous-br-corner -int 14
+defaults write com.apple.dock wvous-br-modifier -int 524288
+ok "Hot corners: TL=Lock Screen(Opt), TR=Mission Control, BL=Desktop, BR=Quick Note(Opt)"
+
+# Mission Control
+defaults write com.apple.dock expose-animation-duration -float 0.1
+defaults write com.apple.dock showAppExposeGestureEnabled -bool true
+ok "Mission Control: fast animation, app exposé gesture on"
+
 # Screenshots — save as PNG to ~/Pictures/Screenshots
 mkdir -p "$HOME/Pictures/Screenshots"
 defaults write com.apple.screencapture location -string "$HOME/Pictures/Screenshots"
