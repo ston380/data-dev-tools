@@ -31,6 +31,7 @@ Installed automatically if missing:
 | Databricks CLI | `databricks` | Interact with Databricks workspaces, jobs, clusters, and notebooks |
 | Azure CLI | `az` | Manage Azure cloud resources and services |
 | AWS CLI | `aws` | Manage Amazon Web Services resources and services |
+| Terraform | `terraform` | Define and provision cloud infrastructure as code |
 | Oracle Cloud CLI | `oci` | Manage Oracle Cloud Infrastructure resources |
 | Azure DevOps extension | `az devops` | Azure CLI extension for managing DevOps pipelines, repos, and boards |
 
@@ -40,12 +41,19 @@ Installed automatically if missing:
 |------|---------|-------------|
 | DuckDB | `duckdb` | In-process analytical SQL database for fast local querying |
 | dbt Cloud CLI | `dbt` | Build, test, and manage dbt data transformation projects |
+| jq | `jq` | Lightweight command-line JSON processor |
+| yq | `yq` | Command-line YAML/JSON/XML processor |
+| parquet-tools | `parquet-tools` | Inspect and explore Parquet files without loading into a database |
+| pgcli | `pgcli` | Postgres CLI with autocomplete and syntax highlighting |
 
 ### Terminal & Productivity
 
 | Tool | Command | Description |
 |------|---------|-------------|
+| gh | `gh` | GitHub CLI for managing PRs, issues, and Actions from the terminal |
 | lazygit | `lazygit` | Terminal UI for Git — stage, commit, branch, and merge visually |
+| eza | `eza` | Modern `ls` replacement with Git status integration and color output |
+| Starship | `starship` | Customizable shell prompt with context for Git, Python, cloud, and more |
 | Atuin | `atuin` | Searchable, synced shell history with context (directory, exit code, duration) |
 | zoxide | `z` | Smarter `cd` that learns your most-used directories |
 | mactop | `mactop` | Real-time macOS system monitor for CPU, GPU, memory, and power |
@@ -64,6 +72,7 @@ Installed automatically if missing:
 
 | App | Description |
 |-----|-------------|
+| Docker Desktop | Run containers locally for databases, dbt, pipelines, and development environments |
 | Anaconda | Python 3 distribution with pre-installed data science packages (NumPy, pandas, scikit-learn, Jupyter, etc.) |
 | Ghostty | Fast, native terminal emulator |
 | cmux | Ghostty-based terminal multiplexer app |
@@ -120,9 +129,10 @@ databricks configure        # Databricks
 oci setup config            # Oracle Cloud
 dbt cloud login             # dbt Cloud
 
-# Terminal tools
+# Terminal tools (add these lines to ~/.zshrc)
 atuin login                 # Sync shell history
-eval "$(zoxide init zsh)"   # Add this line to ~/.zshrc
+eval "$(zoxide init zsh)"   # Smart cd
+eval "$(starship init zsh)" # Shell prompt
 
 # Desktop apps
 # Sign in to Claude Desktop, LM Studio

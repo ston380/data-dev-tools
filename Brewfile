@@ -16,16 +16,24 @@ brew "snowflake-cli"                # Snowflake CLI (snow)
 brew "databricks/tap/databricks"    # Databricks CLI
 brew "azure-cli"                    # Azure CLI (az)
 brew "awscli"                       # AWS CLI (aws)
+brew "terraform"                    # Infrastructure as code
 
 # ------------------------------------------------------------
 # CLI Tools - Data
 # ------------------------------------------------------------
 brew "duckdb"                       # DuckDB CLI
+brew "jq"                           # JSON processor
+brew "yq"                           # YAML processor
+brew "parquet-tools"                # Inspect Parquet files
+brew "pgcli"                        # Postgres CLI with autocomplete
 
 # ------------------------------------------------------------
 # CLI Tools - Terminal & Productivity
 # ------------------------------------------------------------
+brew "gh"                           # GitHub CLI
 brew "lazygit"                      # Git TUI
+brew "eza"                          # Modern ls with git integration
+brew "starship"                     # Customizable shell prompt
 brew "atuin"                        # Shell history search
 brew "zoxide"                       # Smarter cd
 brew "mactop"                       # macOS system monitor
@@ -37,6 +45,7 @@ brew "llmfit"                       # Find models for your hardware
 # ------------------------------------------------------------
 # Desktop Applications
 # ------------------------------------------------------------
+cask "docker"                        # Docker Desktop
 cask "anaconda"                      # Python 3 + data science packages
 cask "ghostty"                      # Terminal emulator
 cask "cmux"                         # Ghostty-based terminal app
