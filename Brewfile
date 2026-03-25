@@ -26,6 +26,7 @@ brew "jq"                           # JSON processor
 brew "yq"                           # YAML processor
 brew "parquet-tools"                # Inspect Parquet files
 brew "pgcli"                        # Postgres CLI with autocomplete
+brew "rclone"                       # Sync files to/from cloud storage
 
 # ------------------------------------------------------------
 # CLI Tools - Terminal & Productivity
@@ -53,6 +54,12 @@ cask "visual-studio-code"           # VS Code
 cask "dbeaver-community"            # DBeaver database tool
 cask "sublime-text"                 # Sublime Text
 cask "lm-studio"                    # LM Studio
+cask "tad"                          # Parquet/CSV/SQLite viewer
+cask "json-crack"                   # Visual JSON viewer
+cask "qlstephen"                    # Quicklook plugin for plain text files
+cask "quicklook-json"               # Quicklook plugin for JSON files
+cask "slack"                        # Slack messaging
+cask "microsoft-teams"              # Microsoft Teams
 cask "logitech-g-hub"              # Logitech G Hub
 cask "claude"                       # Claude Desktop
 

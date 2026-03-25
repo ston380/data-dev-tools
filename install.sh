@@ -116,6 +116,23 @@ else
 fi
 
 # ------------------------------------------------------------
+# SQLFluff (pipx)
+# ------------------------------------------------------------
+info "Checking SQLFluff"
+if command_exists sqlfluff; then
+    ok "Already installed"
+else
+    info "Installing SQLFluff via pipx..."
+    if command_exists pipx; then
+        pipx install sqlfluff
+    elif command_exists pip3; then
+        pip3 install --user sqlfluff
+    else
+        fail "pipx/pip3 not found - install Python first, then run: pipx install sqlfluff"
+    fi
+fi
+
+# ------------------------------------------------------------
 # MCP Servers (npm)
 # ------------------------------------------------------------
 MCP_SERVERS=(

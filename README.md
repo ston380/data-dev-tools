@@ -45,6 +45,8 @@ Installed automatically if missing:
 | yq | `yq` | Command-line YAML/JSON/XML processor |
 | parquet-tools | `parquet-tools` | Inspect and explore Parquet files without loading into a database |
 | pgcli | `pgcli` | Postgres CLI with autocomplete and syntax highlighting |
+| rclone | `rclone` | Sync files to and from S3, Azure Blob, GCS, and 40+ cloud storage providers |
+| SQLFluff | `sqlfluff` | SQL linter and formatter with dbt integration |
 
 ### Terminal & Productivity
 
@@ -80,6 +82,12 @@ Installed automatically if missing:
 | DBeaver Community | Universal database tool — connect to Snowflake, Databricks, Postgres, and more |
 | Sublime Text | Lightweight, fast text editor |
 | LM Studio | Run local LLMs on your Mac |
+| Tad | Desktop viewer for Parquet, CSV, and SQLite files |
+| JSON Crack | Visual graph-based JSON viewer and explorer |
+| qlstephen | Quicklook plugin — preview any plain text file in Finder with spacebar |
+| quicklook-json | Quicklook plugin — formatted JSON preview in Finder with spacebar |
+| Slack | Team messaging and communication |
+| Microsoft Teams | Microsoft collaboration and video conferencing |
 | Logitech G Hub | Configuration software for Logitech peripherals |
 | Claude Desktop | Anthropic's Claude AI assistant |
 
