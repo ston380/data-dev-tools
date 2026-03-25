@@ -1,6 +1,8 @@
 # data-dev-tools
 
-macOS setup automation for data engineering. A single script that installs CLI tools, desktop applications, cloud platform CLIs, and MCP servers — everything a data developer needs on a fresh Mac.
+> **Platform: macOS only** (Apple Silicon and Intel)
+
+One-command setup for a data engineering Mac. Installs CLI tools, desktop applications, cloud platform CLIs, MCP servers, and configures macOS preferences — everything a data developer needs on a fresh Mac.
 
 ## Quick Start
 
