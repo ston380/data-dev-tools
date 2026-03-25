@@ -54,6 +54,7 @@ cask "visual-studio-code"           # VS Code
 cask "dbeaver-community"            # DBeaver database tool
 cask "sublime-text"                 # Sublime Text
 cask "lm-studio"                    # LM Studio
+cask "microsoft-azure-storage-explorer"  # Azure Storage Explorer
 cask "tad"                          # Parquet/CSV/SQLite viewer
 cask "json-crack"                   # Visual JSON viewer
 cask "qlstephen"                    # Quicklook plugin for plain text files
@@ -68,3 +69,4 @@ cask "claude"                       # Claude Desktop
 # ------------------------------------------------------------
 brew "mas"                          # Mac App Store CLI
 mas "Amphetamine", id: 937984704    # Keep-awake utility
+mas "WhatsApp Messenger", id: 310633997  # WhatsApp messaging

@@ -82,6 +82,7 @@ Installed automatically if missing:
 | DBeaver Community | Universal database tool — connect to Snowflake, Databricks, Postgres, and more |
 | Sublime Text | Lightweight, fast text editor |
 | LM Studio | Run local LLMs on your Mac |
+| Azure Storage Explorer | Browse and manage Azure Blob, Queue, Table, and File storage |
 | Tad | Desktop viewer for Parquet, CSV, and SQLite files |
 | JSON Crack | Visual graph-based JSON viewer and explorer |
 | qlstephen | Quicklook plugin — preview any plain text file in Finder with spacebar |
@@ -96,6 +97,7 @@ Installed automatically if missing:
 | App | Description |
 |-----|-------------|
 | Amphetamine | Keep your Mac awake during long-running jobs |
+| WhatsApp Messenger | WhatsApp messaging client |
 
 ### VS Code Extensions
 
