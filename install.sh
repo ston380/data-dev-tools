@@ -62,6 +62,19 @@ else
 fi
 
 # ------------------------------------------------------------
+# Oracle Instant Client (required by DBeaver for Oracle connections)
+# ------------------------------------------------------------
+info "Checking Oracle Instant Client"
+if [ -d "/opt/oracle/instantclient" ] || [ -d "$HOME/instantclient" ] || ls /usr/local/lib/libclntsh* &>/dev/null 2>&1; then
+    ok "Already installed"
+else
+    warn "Oracle Instant Client not found"
+    echo "    Download from: https://www.oracle.com/database/technologies/instant-client/macos-arm64-downloads.html"
+    echo "    Install the Basic and SQL*Plus packages, then configure DBeaver:"
+    echo "      DBeaver → Database → Driver Manager → Oracle → Libraries → Add Folder → select instantclient path"
+fi
+
+# ------------------------------------------------------------
 # dbt Cloud CLI
 # ------------------------------------------------------------
 info "Checking dbt Cloud CLI"
@@ -85,19 +98,92 @@ else
 fi
 
 # ------------------------------------------------------------
-# Snowflake Cortex Code (VS Code extension)
+# VS Code Extensions
 # ------------------------------------------------------------
-info "Checking Snowflake Cortex Code (VS Code extension)"
+VSCODE_EXTENSIONS=(
+    # AI Assistants
+    "snowflake.cortex-code"
+    "saoudrizwan.claude-dev"
+    "github.copilot"
+    "github.copilot-chat"
+    "continue.continue"
+
+    # Python / Data Science
+    "ms-python.python"
+    "ms-python.vscode-pylance"
+    "ms-python.black-formatter"
+    "ms-python.debugpy"
+    "ms-python.vscode-python-envs"
+    "ms-toolsai.jupyter"
+    "ms-toolsai.jupyter-keymap"
+    "ms-toolsai.jupyter-renderers"
+    "ms-toolsai.vscode-jupyter-cell-tags"
+    "ms-toolsai.vscode-jupyter-slideshow"
+
+    # SQL / Data
+    "mtxr.sqltools"
+    "randomfractalsinc.duckdb-sql-tools"
+    "dorzey.vscode-sqlfluff"
+    "mechatroner.rainbow-csv"
+    "mohsen1.prettify-json"
+    "redhat.vscode-yaml"
+    "innoverio.vscode-dbt-power-user"
+
+    # Cloud / Containers
+    "ms-azuretools.vscode-docker"
+    "ms-azuretools.vscode-containers"
+    "ms-vscode-remote.remote-containers"
+    "ms-kubernetes-tools.vscode-kubernetes-tools"
+    "ms-vscode.azure-account"
+    "amazonwebservices.aws-toolkit-vscode"
+
+    # SQL Server / MSSQL
+    "ms-mssql.mssql"
+    "ms-mssql.data-workspace-vscode"
+    "ms-mssql.sql-bindings-vscode"
+    "ms-mssql.sql-database-projects-vscode"
+
+    # Git
+    "github.vscode-pull-request-github"
+    "eamodio.gitlens"
+
+    # General Development
+    "esbenp.prettier-vscode"
+    "oderwat.indent-rainbow"
+    "ms-vscode.powershell"
+    "visualstudioexptteam.vscodeintellicode"
+    "visualstudioexptteam.intellicode-api-usage-examples"
+
+    # Qlik
+    "gimly81.qlik"
+    "q-masters.vscode-qlik"
+    "vinzent.qlikanswers"
+
+    # Themes
+    "github.github-vscode-theme"
+    "hyzeta.vscode-theme-github-light"
+    "rokoroku.vscode-theme-darcula"
+    "gerane.theme-solarized-light"
+    "jamiewest.theme-light-vs-mac"
+    "crazyfluff.bettermaterialthemedarkerhighcontrast"
+    "PKief.material-icon-theme"
+    "catppuccin.catppuccin-vsc"
+)
+
+info "Installing VS Code extensions"
 if command_exists code; then
-    if code --list-extensions 2>/dev/null | grep -qi "snowflake.cortex-code"; then
-        ok "Already installed"
-    else
-        info "Installing Snowflake Cortex Code extension..."
-        code --install-extension snowflake.cortex-code || \
-            warn "Could not install Cortex Code extension - install manually from VS Code marketplace"
-    fi
+    INSTALLED_EXTENSIONS=$(code --list-extensions 2>/dev/null | tr '[:upper:]' '[:lower:]')
+    for ext in "${VSCODE_EXTENSIONS[@]}"; do
+        ext_lower=$(echo "$ext" | tr '[:upper:]' '[:lower:]')
+        if echo "$INSTALLED_EXTENSIONS" | grep -q "$ext_lower"; then
+            ok "$ext already installed"
+        else
+            info "Installing $ext..."
+            code --install-extension "$ext" || warn "Failed to install $ext"
+        fi
+    done
 else
-    warn "VS Code CLI not found - install Cortex Code extension manually from VS Code marketplace"
+    warn "VS Code CLI not found - install extensions manually from VS Code marketplace"
 fi
 
 # ------------------------------------------------------------

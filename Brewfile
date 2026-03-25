@@ -6,6 +6,7 @@
 # ------------------------------------------------------------
 # Taps
 # ------------------------------------------------------------
+tap "homebrew/cask-fonts"
 tap "microsoft/mssql-release"
 tap "databricks/tap"
 tap "dbt-labs/dbt-cli"
@@ -22,6 +23,8 @@ brew "terraform"                    # Infrastructure as code
 # ------------------------------------------------------------
 # CLI Tools - Data
 # ------------------------------------------------------------
+brew "libpq"                        # PostgreSQL client library
+brew "mysql-client"                 # MySQL client library
 brew "unixodbc"                     # ODBC driver manager
 brew "microsoft/mssql-release/msodbcsql18"  # Microsoft ODBC Driver 18 for SQL Server
 brew "microsoft/mssql-release/mssql-tools18" # SQL Server command-line tools (sqlcmd, bcp)
@@ -50,6 +53,7 @@ brew "llmfit"                       # Find models for your hardware
 # ------------------------------------------------------------
 # Desktop Applications
 # ------------------------------------------------------------
+cask "font-jetbrains-mono"           # JetBrains Mono font
 cask "docker"                        # Docker Desktop
 cask "anaconda"                      # Python 3 + data science packages
 brew "FelixKratz/formulae/sketchybar"  # Customizable macOS status bar

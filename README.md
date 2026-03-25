@@ -41,6 +41,9 @@ Installed automatically if missing:
 
 | Tool | Command | Description |
 |------|---------|-------------|
+| libpq | `psql` | PostgreSQL native client library and CLI |
+| mysql-client | `mysql` | MySQL native client library and CLI |
+| Oracle Instant Client | — | Oracle database driver — required by DBeaver for Oracle connections (manual download) |
 | unixODBC | `odbcinst` | ODBC driver manager — required for Dataverse and SQL Server connections |
 | Microsoft ODBC Driver 18 | — | ODBC driver for SQL Server and Dataverse TDS endpoint |
 | mssql-tools18 | `sqlcmd`, `bcp` | SQL Server command-line tools for queries and bulk data operations |
@@ -79,6 +82,7 @@ Installed automatically if missing:
 
 | App | Description |
 |-----|-------------|
+| JetBrains Mono | Monospaced font designed for code — ligatures, clear distinction between similar characters |
 | Docker Desktop | Run containers locally for databases, dbt, pipelines, and development environments |
 | Anaconda | Python 3 distribution with pre-installed data science packages (NumPy, pandas, scikit-learn, Jupyter, etc.) |
 | SketchyBar | Highly customizable macOS menu bar replacement |
@@ -112,9 +116,99 @@ Installed automatically if missing:
 
 ### VS Code Extensions
 
+**AI Assistants:**
+
 | Extension | Description |
 |-----------|-------------|
-| Snowflake Cortex Code | Snowflake AI coding assistant for VS Code |
+| Snowflake Cortex Code | Snowflake AI coding assistant |
+| Cline (claude-dev) | Autonomous AI coding agent in VS Code |
+| GitHub Copilot | AI code completion and suggestions |
+| GitHub Copilot Chat | Conversational AI assistant in VS Code |
+| Continue | Open-source AI assistant — works with local LLMs from LM Studio |
+
+**Python / Data Science:**
+
+| Extension | Description |
+|-----------|-------------|
+| Python | Language support, IntelliSense, and debugging |
+| Pylance | Fast Python language server |
+| Black Formatter | Python code formatter |
+| Debugpy | Python debugger |
+| Python Environments | Manage Python environments |
+| Jupyter | Jupyter notebook support |
+| Jupyter Keymap | Jupyter keyboard shortcuts |
+| Jupyter Renderers | Additional Jupyter output renderers |
+| Jupyter Cell Tags | Cell tag support for notebooks |
+| Jupyter Slideshow | Slideshow support for notebooks |
+
+**SQL / Data:**
+
+| Extension | Description |
+|-----------|-------------|
+| SQLTools | Database management and query runner |
+| DuckDB SQL Tools | DuckDB support for SQLTools |
+| SQLFluff | SQL linter and formatter |
+| Rainbow CSV | Colorize CSV/TSV columns |
+| Prettify JSON | JSON formatting |
+| YAML | YAML language support |
+| dbt Power User | dbt navigation, lineage, and autocomplete |
+
+**Cloud / Containers:**
+
+| Extension | Description |
+|-----------|-------------|
+| Docker | Docker container management |
+| Azure Containers | Azure container tools |
+| Remote - Containers | Develop inside containers |
+| Kubernetes Tools | Kubernetes cluster management |
+| Azure Account | Azure account management |
+| AWS Toolkit | AWS resource management |
+
+**SQL Server / MSSQL:**
+
+| Extension | Description |
+|-----------|-------------|
+| MSSQL | SQL Server connection and query |
+| Data Workspace | SQL data workspace |
+| SQL Bindings | Azure SQL bindings |
+| SQL Database Projects | SQL project management |
+
+**Git:**
+
+| Extension | Description |
+|-----------|-------------|
+| GitHub Pull Requests | Manage PRs and issues from VS Code |
+| GitLens | Git blame, history, and annotations |
+
+**General Development:**
+
+| Extension | Description |
+|-----------|-------------|
+| Prettier | Code formatter for JS, TS, CSS, HTML, JSON, and more |
+| Indent Rainbow | Colorize indentation levels |
+| PowerShell | PowerShell language support |
+| IntelliCode | AI-assisted code completions |
+
+**Qlik:**
+
+| Extension | Description |
+|-----------|-------------|
+| Qlik | Qlik Sense extension development |
+| Qlik (Q-Masters) | Qlik development tools |
+| Qlik Answers | Qlik Answers integration |
+
+**Themes:**
+
+| Extension | Description |
+|-----------|-------------|
+| GitHub Theme | Official GitHub color themes |
+| GitHub Light Theme | Light theme inspired by GitHub |
+| Darcula Theme | JetBrains Darcula theme |
+| Solarized Light | Solarized Light color theme |
+| Light VS Mac | Light theme for macOS |
+| Better Material Theme Darker | Material darker high-contrast theme |
+| Material Icon Theme | Material Design file icons |
+| Catppuccin | Soothing pastel color theme |
 
 ### AI Tools
 
