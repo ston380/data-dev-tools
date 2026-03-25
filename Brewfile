@@ -48,6 +48,7 @@ brew "llmfit"                       # Find models for your hardware
 # ------------------------------------------------------------
 cask "docker"                        # Docker Desktop
 cask "anaconda"                      # Python 3 + data science packages
+cask "nikitabobko/tap/aerospace"    # Tiling window manager
 cask "ghostty"                      # Terminal emulator
 cask "cmux"                         # Ghostty-based terminal app
 cask "visual-studio-code"           # VS Code

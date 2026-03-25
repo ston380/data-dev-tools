@@ -76,6 +76,7 @@ Installed automatically if missing:
 |-----|-------------|
 | Docker Desktop | Run containers locally for databases, dbt, pipelines, and development environments |
 | Anaconda | Python 3 distribution with pre-installed data science packages (NumPy, pandas, scikit-learn, Jupyter, etc.) |
+| AeroSpace | i3-like tiling window manager for macOS |
 | Ghostty | Fast, native terminal emulator |
 | cmux | Ghostty-based terminal multiplexer app |
 | Visual Studio Code | Code editor with extensions and integrated terminal |
