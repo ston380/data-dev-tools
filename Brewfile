@@ -48,6 +48,7 @@ brew "llmfit"                       # Find models for your hardware
 # ------------------------------------------------------------
 cask "docker"                        # Docker Desktop
 cask "anaconda"                      # Python 3 + data science packages
+brew "FelixKratz/formulae/sketchybar"  # Customizable macOS status bar
 cask "nikitabobko/tap/aerospace"    # Tiling window manager
 cask "ghostty"                      # Terminal emulator
 cask "cmux"                         # Ghostty-based terminal app
@@ -63,6 +64,8 @@ cask "qlstephen"                    # Quicklook plugin for plain text files
 cask "quicklook-json"               # Quicklook plugin for JSON files
 cask "slack"                        # Slack messaging
 cask "microsoft-teams"              # Microsoft Teams
+cask "onedrive"                     # Microsoft OneDrive
+cask "google-drive"                 # Google Drive
 cask "logitech-g-hub"              # Logitech G Hub
 cask "claude"                       # Claude Desktop
 

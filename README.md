@@ -76,6 +76,7 @@ Installed automatically if missing:
 |-----|-------------|
 | Docker Desktop | Run containers locally for databases, dbt, pipelines, and development environments |
 | Anaconda | Python 3 distribution with pre-installed data science packages (NumPy, pandas, scikit-learn, Jupyter, etc.) |
+| SketchyBar | Highly customizable macOS menu bar replacement |
 | AeroSpace | i3-like tiling window manager for macOS |
 | Ghostty | Fast, native terminal emulator |
 | cmux | Ghostty-based terminal multiplexer app |
@@ -91,6 +92,8 @@ Installed automatically if missing:
 | quicklook-json | Quicklook plugin — formatted JSON preview in Finder with spacebar |
 | Slack | Team messaging and communication |
 | Microsoft Teams | Microsoft collaboration and video conferencing |
+| Microsoft OneDrive | Cloud file storage and sync for Microsoft 365 |
+| Google Drive | Cloud file storage and sync for Google Workspace |
 | Logitech G Hub | Configuration software for Logitech peripherals |
 | Claude Desktop | Anthropic's Claude AI assistant |
 

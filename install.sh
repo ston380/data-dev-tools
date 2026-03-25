@@ -161,6 +161,59 @@ else
 fi
 
 # ------------------------------------------------------------
+# macOS Preferences
+# ------------------------------------------------------------
+info "Configuring macOS preferences"
+
+# Dock
+defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock autohide-time-modifier -float 0.8
+defaults write com.apple.dock tilesize -int 34
+ok "Dock: auto-hide on, no delay, icon size 34"
+
+# Menu bar clock
+defaults write com.apple.menuextra.clock ShowAMPM -bool true
+defaults write com.apple.menuextra.clock ShowDate -int 0
+defaults write com.apple.menuextra.clock ShowDayOfWeek -bool true
+ok "Menu bar: clock shows AM/PM and day of week"
+
+# Control Center — show battery and Wi-Fi in menu bar
+defaults write com.apple.controlcenter "NSStatusItem VisibleCC Battery" -bool true
+defaults write com.apple.controlcenter "NSStatusItem VisibleCC WiFi" -bool true
+ok "Menu bar: battery and Wi-Fi visible"
+
+# Appearance
+defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
+defaults write NSGlobalDomain AppleInterfaceStyleSwitchesAutomatically -bool true
+ok "Appearance: dark mode with auto-switch"
+
+# Finder
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+defaults write com.apple.finder ShowPathbar -bool true
+defaults write com.apple.finder ShowStatusBar -bool true
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+ok "Finder: show extensions, path bar, status bar, list view"
+
+# Text input — disable auto-correct and auto-capitalize
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+ok "Text input: auto-correct, auto-capitalize, and period substitution off"
+
+# Screenshots — save as PNG to ~/Pictures/Screenshots
+mkdir -p "$HOME/Pictures/Screenshots"
+defaults write com.apple.screencapture location -string "$HOME/Pictures/Screenshots"
+defaults write com.apple.screencapture type -string "png"
+ok "Screenshots: PNG format, saved to ~/Pictures/Screenshots"
+
+# Apply changes
+killall Dock
+killall Finder
+killall SystemUIServer 2>/dev/null || true
+ok "macOS preferences applied"
+
+# ------------------------------------------------------------
 # Summary
 # ------------------------------------------------------------
 info "Installation complete! Review any warnings above."
