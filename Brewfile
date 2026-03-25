@@ -54,6 +54,7 @@ cask "visual-studio-code"           # VS Code
 cask "dbeaver-community"            # DBeaver database tool
 cask "sublime-text"                 # Sublime Text
 cask "lm-studio"                    # LM Studio
+cask "github"                       # GitHub Desktop
 cask "microsoft-azure-storage-explorer"  # Azure Storage Explorer
 cask "tad"                          # Parquet/CSV/SQLite viewer
 cask "json-crack"                   # Visual JSON viewer

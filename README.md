@@ -82,6 +82,7 @@ Installed automatically if missing:
 | DBeaver Community | Universal database tool — connect to Snowflake, Databricks, Postgres, and more |
 | Sublime Text | Lightweight, fast text editor |
 | LM Studio | Run local LLMs on your Mac |
+| GitHub Desktop | Visual Git client for managing repositories, branches, and pull requests |
 | Azure Storage Explorer | Browse and manage Azure Blob, Queue, Table, and File storage |
 | Tad | Desktop viewer for Parquet, CSV, and SQLite files |
 | JSON Crack | Visual graph-based JSON viewer and explorer |
