@@ -116,6 +116,34 @@ else
 fi
 
 # ------------------------------------------------------------
+# MCP Servers (npm)
+# ------------------------------------------------------------
+MCP_SERVERS=(
+    "@modelcontextprotocol/server-github"
+    "@modelcontextprotocol/server-slack"
+    "@modelcontextprotocol/server-filesystem"
+    "@anthropic-ai/mcp-server-duckdb"
+    "@modelcontextprotocol/server-snowflake"
+    "@databricks/mcp-server-databricks"
+    "@anthropic-ai/mcp-server-aws"
+    "@dbt-labs/mcp-server-dbt"
+)
+
+info "Checking MCP servers"
+if command_exists npm; then
+    for server in "${MCP_SERVERS[@]}"; do
+        if npm list -g "$server" &>/dev/null; then
+            ok "$server already installed"
+        else
+            info "Installing $server..."
+            npm install -g "$server" || warn "Failed to install $server"
+        fi
+    done
+else
+    fail "npm not found - install Node.js first, then re-run to install MCP servers"
+fi
+
+# ------------------------------------------------------------
 # Summary
 # ------------------------------------------------------------
 info "Installation complete! Review any warnings above."

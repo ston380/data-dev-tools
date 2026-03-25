@@ -25,16 +25,19 @@ brew "duckdb"                       # DuckDB CLI
 # ------------------------------------------------------------
 # CLI Tools - Terminal & Productivity
 # ------------------------------------------------------------
-brew "tmux"                         # Terminal multiplexer
 brew "lazygit"                      # Git TUI
 brew "atuin"                        # Shell history search
 brew "zoxide"                       # Smarter cd
 brew "mactop"                       # macOS system monitor
+brew "pipx"                         # Install Python CLI tools in isolation
+brew "yarn"                         # JavaScript package manager
+brew "nvm"                          # Node.js version manager
 brew "llmfit"                       # Find models for your hardware
 
 # ------------------------------------------------------------
 # Desktop Applications
 # ------------------------------------------------------------
+cask "anaconda"                      # Python 3 + data science packages
 cask "ghostty"                      # Terminal emulator
 cask "cmux"                         # Ghostty-based terminal app
 cask "visual-studio-code"           # VS Code
