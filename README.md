@@ -258,10 +258,11 @@ eval "$(starship init zsh)" # Shell prompt
 
 ```
 data-dev-tools/
-├── install.sh    # Main install script (entry point)
-├── Brewfile      # Homebrew formulae, casks, and Mac App Store apps
-├── CLAUDE.md     # Project context for Claude Code
-└── README.md     # This file
+├── install.sh       # Main install script (entry point)
+├── Brewfile         # Homebrew formulae, casks, and Mac App Store apps
+├── aerospace.toml   # AeroSpace tiling window manager config
+├── CLAUDE.md        # Project context for Claude Code
+└── README.md        # This file
 ```
 
 ## How It Works

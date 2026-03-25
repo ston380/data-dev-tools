@@ -262,6 +262,17 @@ else
 fi
 
 # ------------------------------------------------------------
+# AeroSpace config
+# ------------------------------------------------------------
+info "Installing AeroSpace config"
+if [ -f "$HOME/.aerospace.toml" ]; then
+    warn "~/.aerospace.toml already exists - skipping (check $SCRIPT_DIR/aerospace.toml for reference)"
+else
+    cp "$SCRIPT_DIR/aerospace.toml" "$HOME/.aerospace.toml"
+    ok "Copied aerospace.toml to ~/.aerospace.toml"
+fi
+
+# ------------------------------------------------------------
 # macOS Preferences
 # ------------------------------------------------------------
 info "Configuring macOS preferences"
