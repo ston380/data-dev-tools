@@ -10,7 +10,7 @@ brew "pipx"                         # Install Python CLI tools in isolation
 brew "yarn"                         # JavaScript package manager
 brew "nvm"                          # Node.js version manager
 brew "llmfit"                       # Find models for your hardware
-brew "neofetch"                     # System info display with ASCII art
+brew "fastfetch"                    # System info display (actively maintained neofetch successor)
 
 cask "ghostty"                      # Terminal emulator
 cask "cmux"                         # Ghostty-based terminal app
