@@ -1,0 +1,15 @@
+# Terminal & Productivity
+brew "gh"                           # GitHub CLI
+brew "lazygit"                      # Git TUI
+brew "eza"                          # Modern ls with git integration
+brew "starship"                     # Customizable shell prompt
+brew "atuin"                        # Shell history search
+brew "zoxide"                       # Smarter cd
+brew "mactop"                       # macOS system monitor
+brew "pipx"                         # Install Python CLI tools in isolation
+brew "yarn"                         # JavaScript package manager
+brew "nvm"                          # Node.js version manager
+brew "llmfit"                       # Find models for your hardware
+
+cask "ghostty"                      # Terminal emulator
+cask "cmux"                         # Ghostty-based terminal app

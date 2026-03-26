@@ -1,0 +1,14 @@
+# Data Tools
+tap "microsoft/mssql-release"
+
+brew "libpq"                        # PostgreSQL client library
+brew "mysql-client"                 # MySQL client library
+brew "unixodbc"                     # ODBC driver manager
+brew "microsoft/mssql-release/msodbcsql18"  # Microsoft ODBC Driver 18 for SQL Server
+brew "microsoft/mssql-release/mssql-tools18" # SQL Server command-line tools (sqlcmd, bcp)
+brew "duckdb"                       # DuckDB CLI
+brew "jq"                           # JSON processor
+brew "yq"                           # YAML processor
+brew "parquet-tools"                # Inspect Parquet files
+brew "pgcli"                        # Postgres CLI with autocomplete
+brew "rclone"                       # Sync files to/from cloud storage

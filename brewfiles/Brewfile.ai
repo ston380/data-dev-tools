@@ -1,0 +1,3 @@
+# AI Tools
+cask "lm-studio"                    # LM Studio
+cask "claude"                       # Claude Desktop

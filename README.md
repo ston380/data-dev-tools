@@ -14,6 +14,20 @@ cd data-dev-tools
 
 The script is idempotent — it skips anything already installed, so it's safe to re-run.
 
+### Selective Installation
+
+Install specific groups, and optionally only install or only configure:
+
+```bash
+./install.sh cloud data           # Install + config specific groups
+./install.sh cloud --install      # Only install cloud tools (no config)
+./install.sh cloud --config       # Only run config for cloud
+./install.sh --list               # Show available groups
+./install.sh --help               # Show usage
+```
+
+**Groups:** `cloud`, `data`, `terminal`, `apps`, `ai`, `vscode`, `config`
+
 ## What Gets Installed
 
 ### Prerequisites
@@ -258,21 +272,26 @@ eval "$(starship init zsh)" # Shell prompt
 
 ```
 data-dev-tools/
-├── install.sh       # Main install script (entry point)
-├── Brewfile         # Homebrew formulae, casks, and Mac App Store apps
-├── aerospace.toml   # AeroSpace tiling window manager config
-├── CLAUDE.md        # Project context for Claude Code
-└── README.md        # This file
+├── install.sh                # Main install script with group-based modularity
+├── Brewfile                  # Aggregate Brewfile (sources all group files)
+├── brewfiles/
+│   ├── Brewfile.ai           # AI tools (Claude Desktop, LM Studio)
+│   ├── Brewfile.apps         # Desktop applications and Mac App Store
+│   ├── Brewfile.cloud        # Cloud platform CLIs
+│   ├── Brewfile.data         # Data tools and database drivers
+│   └── Brewfile.terminal     # Terminal and productivity tools
+├── aerospace.toml            # AeroSpace tiling window manager config
+├── CLAUDE.md                 # Project context for Claude Code
+└── README.md                 # This file
 ```
 
 ## How It Works
 
-1. Installs **Xcode Command Line Tools** (macOS build prerequisite)
-2. Installs **Homebrew** if missing
-3. Runs `brew bundle` with the Brewfile (CLI tools, desktop apps, App Store apps)
-4. Installs tools not available via Homebrew (OCI CLI, dbt Cloud CLI, Azure DevOps extension, Cortex Code VS Code extension, Claude Code)
-5. Installs **MCP servers** globally via npm
-6. Prints post-install login and configuration steps
+1. Parses CLI arguments: group names and `--install`/`--config` flags
+2. Installs **Xcode Command Line Tools** and **Homebrew** (always, as prerequisites)
+3. For each selected group, runs the install and/or config function
+4. Each install function runs `brew bundle` with its group Brewfile, plus any non-Homebrew installs
+5. The `config` group handles **macOS preferences** and **AeroSpace config**
 
 ## Requirements
 

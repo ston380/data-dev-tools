@@ -1,0 +1,28 @@
+# Desktop Applications
+tap "homebrew/cask-fonts"
+
+cask "font-jetbrains-mono"           # JetBrains Mono font
+cask "docker"                        # Docker Desktop
+cask "anaconda"                      # Python 3 + data science packages
+brew "FelixKratz/formulae/sketchybar"  # Customizable macOS status bar
+cask "nikitabobko/tap/aerospace"    # Tiling window manager
+cask "visual-studio-code"           # VS Code
+cask "dbeaver-community"            # DBeaver database tool
+cask "sublime-text"                 # Sublime Text
+cask "github"                       # GitHub Desktop
+cask "microsoft-azure-storage-explorer"  # Azure Storage Explorer
+cask "tad"                          # Parquet/CSV/SQLite viewer
+cask "json-crack"                   # Visual JSON viewer
+cask "qlstephen"                    # Quicklook plugin for plain text files
+cask "quicklook-json"               # Quicklook plugin for JSON files
+cask "slack"                        # Slack messaging
+cask "microsoft-teams"              # Microsoft Teams
+cask "onedrive"                     # Microsoft OneDrive
+cask "google-drive"                 # Google Drive
+cask "raycast"                      # Spotlight replacement and launcher
+cask "logitech-g-hub"              # Logitech G Hub
+
+# Mac App Store (requires `mas` CLI)
+brew "mas"                          # Mac App Store CLI
+mas "Amphetamine", id: 937984704    # Keep-awake utility
+mas "WhatsApp Messenger", id: 310633997  # WhatsApp messaging

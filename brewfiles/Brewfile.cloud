@@ -1,0 +1,9 @@
+# Cloud Platform CLIs
+tap "databricks/tap"
+tap "dbt-labs/dbt-cli"
+
+brew "snowflake-cli"                # Snowflake CLI (snow)
+brew "databricks/tap/databricks"    # Databricks CLI
+brew "azure-cli"                    # Azure CLI (az)
+brew "awscli"                       # AWS CLI (aws)
+brew "terraform"                    # Infrastructure as code
