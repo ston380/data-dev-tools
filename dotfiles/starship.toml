@@ -1,0 +1,93 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+[character]
+success_symbol = '[❯](bold green)'
+error_symbol = '[❯](bold red)'
+
+[directory]
+truncation_length = 4
+truncation_symbol = ".../"
+fish_style_pwd_dir_length = 0
+truncate_to_repo = false
+style = "#888888"
+repo_root_style = "bold green"
+before_repo_root_style = "#888888"
+repo_root_format = "[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
+
+[git_branch]
+style = "bold #FF8C00"
+
+[git_commit]
+disabled = false
+commit_hash_length = 4
+tag_disabled = false
+
+[git_state]
+disabled = true
+
+[git_status]
+conflicted = '=${count} '
+untracked = '?${count} '
+modified = '!${count} '
+staged = '+${count} '
+renamed = '»${count} '
+deleted = '✘${count} '
+stashed = '$${count} '
+ahead = '⇡${count} '
+behind = '⇣${count} '
+diverged = '⇕⇡${ahead_count}⇣${behind_count} '
+
+[nodejs]
+
+[python]
+
+[rust]
+
+[package]
+disabled = false
+
+[conda]
+ignore_base = true
+
+[docker_context]
+
+[aws]
+
+[azure]
+
+[terraform]
+
+[kubernetes]
+disabled = false
+
+[java]
+
+[scala]
+
+[golang]
+
+[battery]
+full_symbol = "⚡"
+charging_symbol = "⚡"
+discharging_symbol = "⚡"
+unknown_symbol = "⚡"
+empty_symbol = "⚡"
+format = "[$symbol$percentage]($style) | "
+
+[[battery.display]]
+threshold = 100
+style = "bold green"
+
+[time]
+disabled = false
+format = "[$time]($style) "
+time_format = "%H:%M"
+style = "bold white"
+
+[cmd_duration]
+min_time = 2000
+show_milliseconds = false

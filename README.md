@@ -280,6 +280,11 @@ data-dev-tools/
 │   ├── Brewfile.cloud        # Cloud platform CLIs
 │   ├── Brewfile.data         # Data tools and database drivers
 │   └── Brewfile.terminal     # Terminal and productivity tools
+├── dotfiles/
+│   ├── .zshrc                # Zsh shell config
+│   ├── starship.toml         # Starship prompt config
+│   └── ghostty/
+│       └── config            # Ghostty/cmux terminal config
 ├── aerospace.toml            # AeroSpace tiling window manager config
 ├── CLAUDE.md                 # Project context for Claude Code
 └── README.md                 # This file
@@ -291,7 +296,7 @@ data-dev-tools/
 2. Installs **Xcode Command Line Tools** and **Homebrew** (always, as prerequisites)
 3. For each selected group, runs the install and/or config function
 4. Each install function runs `brew bundle` with its group Brewfile, plus any non-Homebrew installs
-5. The `config` group handles **macOS preferences** and **AeroSpace config**
+5. The `config` group handles **macOS preferences**, **AeroSpace**, **Starship**, **Ghostty**, and **zsh** configs
 
 ## Requirements
 

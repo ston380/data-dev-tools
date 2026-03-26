@@ -482,6 +482,35 @@ config_config() {
         ok "Copied aerospace.toml to ~/.aerospace.toml"
     fi
 
+    # Starship config
+    info " Installing Starship config"
+    mkdir -p "$HOME/.config"
+    if [ -f "$HOME/.config/starship.toml" ]; then
+        warn "~/.config/starship.toml already exists - skipping (check $SCRIPT_DIR/dotfiles/starship.toml for reference)"
+    else
+        cp "$SCRIPT_DIR/dotfiles/starship.toml" "$HOME/.config/starship.toml"
+        ok "Copied starship.toml to ~/.config/starship.toml"
+    fi
+
+    # Ghostty config
+    info " Installing Ghostty config"
+    mkdir -p "$HOME/.config/ghostty"
+    if [ -f "$HOME/.config/ghostty/config" ]; then
+        warn "~/.config/ghostty/config already exists - skipping (check $SCRIPT_DIR/dotfiles/ghostty/config for reference)"
+    else
+        cp "$SCRIPT_DIR/dotfiles/ghostty/config" "$HOME/.config/ghostty/config"
+        ok "Copied ghostty config to ~/.config/ghostty/config"
+    fi
+
+    # Zsh config
+    info " Installing .zshrc"
+    if [ -f "$HOME/.zshrc" ]; then
+        warn "~/.zshrc already exists - skipping (check $SCRIPT_DIR/dotfiles/.zshrc for reference)"
+    else
+        cp "$SCRIPT_DIR/dotfiles/.zshrc" "$HOME/.zshrc"
+        ok "Copied .zshrc to ~/.zshrc"
+    fi
+
     # Apply changes
     killall Dock
     killall Finder
