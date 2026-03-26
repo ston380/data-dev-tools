@@ -1,3 +1,4 @@
 # AI Tools
 cask "lm-studio"                    # LM Studio
 cask "claude"                       # Claude Desktop
+brew "claude-code"                  # Claude Code CLI
