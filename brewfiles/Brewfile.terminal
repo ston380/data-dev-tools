@@ -11,6 +11,7 @@ brew "yarn"                         # JavaScript package manager
 brew "nvm"                          # Node.js version manager
 brew "llmfit"                       # Find models for your hardware
 brew "fastfetch"                    # System info display (actively maintained neofetch successor)
+brew "tty-clock"                    # Terminal clock
 
 cask "ghostty"                      # Terminal emulator
 cask "cmux"                         # Ghostty-based terminal app

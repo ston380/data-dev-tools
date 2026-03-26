@@ -234,7 +234,31 @@ install_apps() {
 }
 
 config_apps() {
-    :
+    # cmux
+    info " Configuring cmux"
+    defaults write com.cmuxterm.app appearanceMode -string "dark"
+    defaults write com.cmuxterm.app appIconMode -string "dark"
+    defaults write com.cmuxterm.app appLanguage -string "system"
+    # Sidebar
+    defaults write com.cmuxterm.app sidebarActiveTabIndicatorStyle -string "solidFill"
+    defaults write com.cmuxterm.app sidebarPreset -string "nativeSidebar"
+    defaults write com.cmuxterm.app sidebarMaterial -string "sidebar"
+    defaults write com.cmuxterm.app sidebarBlendMode -string "withinWindow"
+    defaults write com.cmuxterm.app sidebarBlurOpacity -integer 1
+    defaults write com.cmuxterm.app sidebarTintHex -string "#000000"
+    defaults write com.cmuxterm.app sidebarTintOpacity -string "0.18"
+    defaults write com.cmuxterm.app sidebarCornerRadius -integer 0
+    defaults write com.cmuxterm.app sidebarHideAllDetails -bool false
+    defaults write com.cmuxterm.app sidebarState -string "followWindow"
+    ok "cmux: sidebar configured (solid fill, native preset, dark)"
+    # Notifications
+    defaults write com.cmuxterm.app notificationSound -string "Hero"
+    defaults write com.cmuxterm.app notificationPaneRingEnabled -bool false
+    ok "cmux: notifications configured (Hero sound, ring disabled)"
+    # Browser
+    defaults write com.cmuxterm.app browserThemeMode -string "system"
+    defaults write com.cmuxterm.app browserOpenSidebarPullRequestLinksInCmuxBrowser -bool false
+    ok "cmux: browser configured (system theme)"
 }
 
 install_ai() {
