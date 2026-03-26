@@ -7,15 +7,15 @@ AVAILABLE_GROUPS=(cloud data terminal apps ai vscode config)
 # ------------------------------------------------------------
 # Helpers
 # ------------------------------------------------------------
-info()  { printf "\n\033[1;34m==> %s\033[0m\n" "$1"; }
-ok()    { printf "\033[1;32m    %s\033[0m\n" "$1"; }
-warn()  { printf "\033[1;33m    %s\033[0m\n" "$1"; }
-fail()  { printf "\033[1;31m    %s\033[0m\n" "$1"; }
+info()  { printf "\n\033[1;34m  %s\033[0m\n" "$1"; }
+ok()    { printf "\033[1;32m   %s\033[0m\n" "$1"; }
+warn()  { printf "\033[1;33m   %s\033[0m\n" "$1"; }
+fail()  { printf "\033[1;31m   %s\033[0m\n" "$1"; }
 
 command_exists() { command -v "$1" &>/dev/null; }
 
 usage() {
-    echo "Usage: ./install.sh [groups...] [--install|--config] [--list] [--help]"
+    echo "  Usage: ./install.sh [groups...] [--install|--config] [--list] [--help]"
     echo ""
     echo "Options:"
     echo "  (no args)     Install and configure everything"
@@ -55,8 +55,12 @@ for arg in "$@"; do
             ;;
         --list)
             echo "Available groups:"
+            declare -A GROUP_ICONS=(
+                [cloud]="󰅟" [data]="󰆼" [terminal]="" [apps]=""
+                [ai]="󰧑" [vscode]="󰨞" [config]=""
+            )
             for g in "${AVAILABLE_GROUPS[@]}"; do
-                echo "  $g"
+                echo "  ${GROUP_ICONS[$g]}  $g"
             done
             exit 0
             ;;
@@ -105,11 +109,11 @@ group_selected() {
 # ------------------------------------------------------------
 # Pre-flight: Xcode Command Line Tools
 # ------------------------------------------------------------
-info "Checking Xcode Command Line Tools"
+info " Checking Xcode Command Line Tools"
 if xcode-select -p &>/dev/null; then
     ok "Already installed"
 else
-    info "Installing Xcode Command Line Tools..."
+    info " Installing Xcode Command Line Tools..."
     xcode-select --install
     echo "Press any key once the installation has completed..."
     read -r -n 1
@@ -118,11 +122,11 @@ fi
 # ------------------------------------------------------------
 # Pre-flight: Homebrew
 # ------------------------------------------------------------
-info "Checking Homebrew"
+info "󱄖 Checking Homebrew"
 if command_exists brew; then
     ok "Already installed"
 else
-    info "Installing Homebrew..."
+    info "󱄖 Installing Homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
@@ -132,15 +136,15 @@ fi
 # ============================================================
 
 install_cloud() {
-    info "Installing cloud tools"
+    info "󰅟 Installing cloud tools"
     brew bundle --file="$SCRIPT_DIR/brewfiles/Brewfile.cloud" --no-lock
 
     # Oracle Cloud CLI (oci-cli via pip)
-    info "Checking Oracle Cloud CLI (oci)"
+    info "󰅟 Checking Oracle Cloud CLI (oci)"
     if command_exists oci; then
         ok "Already installed"
     else
-        info "Installing oci-cli via pip..."
+        info " Installing oci-cli via pip..."
         if command_exists pipx; then
             pipx install oci-cli
         elif command_exists pip3; then
@@ -151,27 +155,27 @@ install_cloud() {
     fi
 
     # dbt Cloud CLI
-    info "Checking dbt Cloud CLI"
+    info "󰅟 Checking dbt Cloud CLI"
     if command_exists dbt; then
         ok "Already installed"
     else
-        info "Installing dbt Cloud CLI..."
+        info " Installing dbt Cloud CLI..."
         brew install dbt-labs/dbt-cli/dbt-cloud-cli 2>/dev/null || \
             warn "dbt Cloud CLI brew install failed - try: pip3 install dbt-core"
     fi
 
     # Azure DevOps CLI extension
-    info "Checking Azure DevOps CLI extension"
+    info "󰅟 Checking Azure DevOps CLI extension"
     if az extension show --name azure-devops &>/dev/null 2>&1; then
         ok "Already installed"
     else
-        info "Installing Azure DevOps extension for az CLI..."
+        info " Installing Azure DevOps extension for az CLI..."
         az extension add --name azure-devops
     fi
 }
 
 config_cloud() {
-    info "Cloud tools post-install steps"
+    info "󰅟 Cloud tools post-install steps"
     echo "    - Sign in to Azure CLI:       az login"
     echo "    - Sign in to AWS CLI:         aws configure"
     echo "    - Sign in to Snowflake CLI:   snow connection add"
@@ -181,15 +185,15 @@ config_cloud() {
 }
 
 install_data() {
-    info "Installing data tools"
+    info "󰆼 Installing data tools"
     brew bundle --file="$SCRIPT_DIR/brewfiles/Brewfile.data" --no-lock
 
     # SQLFluff
-    info "Checking SQLFluff"
+    info "󰆼 Checking SQLFluff"
     if command_exists sqlfluff; then
         ok "Already installed"
     else
-        info "Installing SQLFluff via pipx..."
+        info " Installing SQLFluff via pipx..."
         if command_exists pipx; then
             pipx install sqlfluff
         elif command_exists pip3; then
@@ -200,7 +204,7 @@ install_data() {
     fi
 
     # Oracle Instant Client
-    info "Checking Oracle Instant Client"
+    info "󰆼 Checking Oracle Instant Client"
     if [ -d "/opt/oracle/instantclient" ] || [ -d "$HOME/instantclient" ] || ls /usr/local/lib/libclntsh* &>/dev/null 2>&1; then
         ok "Already installed"
     else
@@ -216,7 +220,7 @@ config_data() {
 }
 
 install_terminal() {
-    info "Installing terminal tools"
+    info " Installing terminal tools"
     brew bundle --file="$SCRIPT_DIR/brewfiles/Brewfile.terminal" --no-lock
 }
 
@@ -225,7 +229,7 @@ config_terminal() {
 }
 
 install_apps() {
-    info "Installing desktop applications"
+    info " Installing desktop applications"
     brew bundle --file="$SCRIPT_DIR/brewfiles/Brewfile.apps" --no-lock
 }
 
@@ -234,15 +238,15 @@ config_apps() {
 }
 
 install_ai() {
-    info "Installing AI tools"
+    info "󰧑 Installing AI tools"
     brew bundle --file="$SCRIPT_DIR/brewfiles/Brewfile.ai" --no-lock
 
     # Cortex Code CLI (npm)
-    info "Checking Cortex Code CLI"
+    info "󰧑 Checking Cortex Code CLI"
     if command_exists cortex; then
         ok "Already installed"
     else
-        info "Installing Cortex Code CLI via npm..."
+        info " Installing Cortex Code CLI via npm..."
         if command_exists npm; then
             npm install -g @snowflake-labs/cortex-cli || warn "Failed to install Cortex Code CLI"
         else
@@ -251,11 +255,11 @@ install_ai() {
     fi
 
     # Claude Code (npm)
-    info "Checking Claude Code"
+    info "󰧑 Checking Claude Code"
     if command_exists claude; then
         ok "Already installed"
     else
-        info "Installing Claude Code via npm..."
+        info " Installing Claude Code via npm..."
         if command_exists npm; then
             npm install -g @anthropic-ai/claude-code
         else
@@ -275,13 +279,13 @@ install_ai() {
         "@dbt-labs/mcp-server-dbt"
     )
 
-    info "Checking MCP servers"
+    info "󰧑 Checking MCP servers"
     if command_exists npm; then
         for server in "${MCP_SERVERS[@]}"; do
             if npm list -g "$server" &>/dev/null; then
                 ok "$server already installed"
             else
-                info "Installing $server..."
+                info " Installing $server..."
                 npm install -g "$server" || warn "Failed to install $server"
             fi
         done
@@ -298,7 +302,7 @@ install_ai() {
         "continue.continue"
     )
 
-    info "Installing AI VS Code extensions"
+    info "󰧑 Installing AI VS Code extensions"
     if command_exists code; then
         INSTALLED_EXTENSIONS=$(code --list-extensions 2>/dev/null | tr '[:upper:]' '[:lower:]')
         for ext in "${AI_VSCODE_EXTENSIONS[@]}"; do
@@ -306,7 +310,7 @@ install_ai() {
             if echo "$INSTALLED_EXTENSIONS" | grep -q "$ext_lower"; then
                 ok "$ext already installed"
             else
-                info "Installing $ext..."
+                info " Installing $ext..."
                 code --install-extension "$ext" || warn "Failed to install $ext"
             fi
         done
@@ -383,7 +387,7 @@ install_vscode() {
         "catppuccin.catppuccin-vsc"
     )
 
-    info "Installing VS Code extensions"
+    info "󰨞 Installing VS Code extensions"
     if command_exists code; then
         INSTALLED_EXTENSIONS=$(code --list-extensions 2>/dev/null | tr '[:upper:]' '[:lower:]')
         for ext in "${VSCODE_EXTENSIONS[@]}"; do
@@ -391,7 +395,7 @@ install_vscode() {
             if echo "$INSTALLED_EXTENSIONS" | grep -q "$ext_lower"; then
                 ok "$ext already installed"
             else
-                info "Installing $ext..."
+                info " Installing $ext..."
                 code --install-extension "$ext" || warn "Failed to install $ext"
             fi
         done
@@ -409,7 +413,7 @@ install_config() {
 }
 
 config_config() {
-    info "Configuring macOS preferences"
+    info " Configuring macOS preferences"
 
     # Dock
     defaults write com.apple.dock autohide -bool true
@@ -470,7 +474,7 @@ config_config() {
     ok "Screenshots: PNG format, saved to ~/Pictures/Screenshots"
 
     # AeroSpace config
-    info "Installing AeroSpace config"
+    info " Installing AeroSpace config"
     if [ -f "$HOME/.aerospace.toml" ]; then
         warn "~/.aerospace.toml already exists - skipping (check $SCRIPT_DIR/aerospace.toml for reference)"
     else
@@ -488,9 +492,9 @@ config_config() {
 # ============================================================
 # Main dispatcher
 # ============================================================
-info "Selected groups: ${SELECTED_GROUPS[*]}"
-[[ "$DO_INSTALL" == true ]] && info "Mode: install" || true
-[[ "$DO_CONFIG" == true ]] && info "Mode: config" || true
+info " Selected groups: ${SELECTED_GROUPS[*]}"
+[[ "$DO_INSTALL" == true ]] && info " Mode: install" || true
+[[ "$DO_CONFIG" == true ]] && info " Mode: config" || true
 
 for group in "${SELECTED_GROUPS[@]}"; do
     if $DO_INSTALL; then
@@ -504,5 +508,5 @@ done
 # ------------------------------------------------------------
 # Summary
 # ------------------------------------------------------------
-info "Done! Review any warnings above."
+info " Done! Review any warnings above."
 echo ""
