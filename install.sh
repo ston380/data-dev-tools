@@ -113,6 +113,16 @@ group_selected() {
 }
 
 # ------------------------------------------------------------
+# Pre-flight: sudo credentials
+# ------------------------------------------------------------
+info " Requesting administrator access (one-time password prompt)"
+sudo -v
+# Keep sudo alive in the background until the script exits
+while true; do sudo -n true; sleep 50; done 2>/dev/null &
+SUDO_KEEPALIVE_PID=$!
+trap 'kill "$SUDO_KEEPALIVE_PID" 2>/dev/null' EXIT
+
+# ------------------------------------------------------------
 # Pre-flight: Xcode Command Line Tools
 # ------------------------------------------------------------
 info " Checking Xcode Command Line Tools"
