@@ -3,6 +3,7 @@ tap "microsoft/mssql-release"
 
 brew "libpq"                        # PostgreSQL client library
 brew "mysql-client"                 # MySQL client library
+brew "libiodbc"                     # iODBC driver manager
 brew "unixodbc"                     # ODBC driver manager
 brew "microsoft/mssql-release/msodbcsql18"  # Microsoft ODBC Driver 18 for SQL Server
 brew "microsoft/mssql-release/mssql-tools18" # SQL Server command-line tools (sqlcmd, bcp)

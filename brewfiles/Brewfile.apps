@@ -1,6 +1,4 @@
 # Desktop Applications
-tap "homebrew/cask-fonts"
-
 cask "font-jetbrains-mono"           # JetBrains Mono font
 
 # Nerd Fonts (patched fonts with icons/glyphs)
@@ -87,7 +85,6 @@ cask "sublime-text"                 # Sublime Text
 cask "github"                       # GitHub Desktop
 cask "microsoft-azure-storage-explorer"  # Azure Storage Explorer
 cask "tad"                          # Parquet/CSV/SQLite viewer
-cask "json-crack"                   # Visual JSON viewer
 cask "qlstephen"                    # Quicklook plugin for plain text files
 cask "quicklook-json"               # Quicklook plugin for JSON files
 cask "slack"                        # Slack messaging

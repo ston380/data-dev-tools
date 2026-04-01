@@ -55,12 +55,18 @@ for arg in "$@"; do
             ;;
         --list)
             echo "Available groups:"
-            declare -A GROUP_ICONS=(
-                [cloud]="󰅟" [data]="󰆼" [terminal]="" [apps]=""
-                [ai]="󰧑" [vscode]="󰨞" [config]=""
-            )
             for g in "${AVAILABLE_GROUPS[@]}"; do
-                echo "  ${GROUP_ICONS[$g]}  $g"
+                case "$g" in
+                    cloud)    icon="󰅟" ;;
+                    data)     icon="󰆼" ;;
+                    terminal) icon="" ;;
+                    apps)     icon="" ;;
+                    ai)       icon="󰧑" ;;
+                    vscode)   icon="󰨞" ;;
+                    config)   icon="" ;;
+                    *)        icon=" " ;;
+                esac
+                echo "  $icon  $g"
             done
             exit 0
             ;;
@@ -137,7 +143,7 @@ fi
 
 install_cloud() {
     info "󰅟 Installing cloud tools"
-    brew bundle --file="$SCRIPT_DIR/brewfiles/Brewfile.cloud" --no-lock
+    brew bundle --file="$SCRIPT_DIR/brewfiles/Brewfile.cloud"
 
     # Oracle Cloud CLI (oci-cli via pip)
     info "󰅟 Checking Oracle Cloud CLI (oci)"
@@ -186,7 +192,7 @@ config_cloud() {
 
 install_data() {
     info "󰆼 Installing data tools"
-    brew bundle --file="$SCRIPT_DIR/brewfiles/Brewfile.data" --no-lock
+    brew bundle --file="$SCRIPT_DIR/brewfiles/Brewfile.data"
 
     # SQLFluff
     info "󰆼 Checking SQLFluff"
@@ -221,7 +227,7 @@ config_data() {
 
 install_terminal() {
     info " Installing terminal tools"
-    brew bundle --file="$SCRIPT_DIR/brewfiles/Brewfile.terminal" --no-lock
+    brew bundle --file="$SCRIPT_DIR/brewfiles/Brewfile.terminal"
 }
 
 config_terminal() {
@@ -230,7 +236,117 @@ config_terminal() {
 
 install_apps() {
     info " Installing desktop applications"
-    brew bundle --file="$SCRIPT_DIR/brewfiles/Brewfile.apps" --no-lock
+    local brewfile="$SCRIPT_DIR/brewfiles/Brewfile.apps"
+
+    # Parse Brewfile into sections
+    local fonts=() casks=() brews=() mas_items=()
+    while IFS= read -r line; do
+        # Skip comments and blank lines
+        [[ "$line" =~ ^[[:space:]]*# ]] && continue
+        [[ -z "${line// }" ]] && continue
+        # Strip inline comments
+        local entry="${line%%#*}"
+        entry="${entry%"${entry##*[![:space:]]}"}"  # trim trailing whitespace
+        if [[ "$entry" =~ ^cask\ \"font- ]]; then
+            fonts+=("$entry")
+        elif [[ "$entry" =~ ^cask\  ]]; then
+            casks+=("$entry")
+        elif [[ "$entry" =~ ^brew\  ]]; then
+            brews+=("$entry")
+        elif [[ "$entry" =~ ^mas\  ]]; then
+            mas_items+=("$entry")
+        fi
+    done < "$brewfile"
+
+    local total=$(( ${#fonts[@]} + ${#casks[@]} + ${#brews[@]} + ${#mas_items[@]} ))
+    local current=0
+
+    # Install fonts
+    if [[ ${#fonts[@]} -gt 0 ]]; then
+        info " Fonts (${#fonts[@]} items)"
+        for entry in "${fonts[@]}"; do
+            current=$((current + 1))
+            local name
+            name=$(echo "$entry" | sed 's/.*"\(.*\)".*/\1/')
+            printf "  [%d/%d] %s ... " "$current" "$total" "$name"
+            if brew list --cask "$name" &>/dev/null 2>&1; then
+                ok "already installed"
+            else
+                if brew install --cask "$name" &>/dev/null 2>&1; then
+                    ok "installed"
+                else
+                    warn "failed"
+                fi
+            fi
+        done
+    fi
+
+    # Install brew formulae
+    if [[ ${#brews[@]} -gt 0 ]]; then
+        info " Formulae (${#brews[@]} items)"
+        for entry in "${brews[@]}"; do
+            current=$((current + 1))
+            local name
+            name=$(echo "$entry" | sed 's/.*"\(.*\)".*/\1/')
+            printf "  [%d/%d] %s ... " "$current" "$total" "$name"
+            if brew list "$name" &>/dev/null 2>&1; then
+                ok "already installed"
+            else
+                if brew install "$name" &>/dev/null 2>&1; then
+                    ok "installed"
+                else
+                    warn "failed"
+                fi
+            fi
+        done
+    fi
+
+    # Install cask applications
+    if [[ ${#casks[@]} -gt 0 ]]; then
+        info " Applications (${#casks[@]} items)"
+        for entry in "${casks[@]}"; do
+            current=$((current + 1))
+            local name
+            name=$(echo "$entry" | sed 's/.*"\(.*\)".*/\1/')
+            printf "  [%d/%d] %s ... " "$current" "$total" "$name"
+            if brew list --cask "$name" &>/dev/null 2>&1; then
+                ok "already installed"
+            else
+                if brew install --cask "$name" &>/dev/null 2>&1; then
+                    ok "installed"
+                else
+                    warn "failed"
+                fi
+            fi
+        done
+    fi
+
+    # Install Mac App Store apps
+    if [[ ${#mas_items[@]} -gt 0 ]]; then
+        info " Mac App Store (${#mas_items[@]} items)"
+        if command_exists mas; then
+            for entry in "${mas_items[@]}"; do
+                current=$((current + 1))
+                local id name
+                id=$(echo "$entry" | sed 's/.*id:[[:space:]]*\([0-9]*\).*/\1/')
+                name=$(echo "$entry" | sed 's/mas "\(.*\)",.*/\1/')
+                printf "  [%d/%d] %s (id: %s) ... " "$current" "$total" "$name" "$id"
+                if mas list | grep -q "^$id "; then
+                    ok "already installed"
+                else
+                    if mas install "$id" &>/dev/null 2>&1; then
+                        ok "installed"
+                    else
+                        warn "failed"
+                    fi
+                fi
+            done
+        else
+            warn "mas CLI not found - install brew formulae first, then re-run"
+        fi
+    fi
+
+    ok "Apps: $current/$total processed"
 }
 
 config_apps() {
@@ -263,7 +379,7 @@ config_apps() {
 
 install_ai() {
     info "󰧑 Installing AI tools"
-    brew bundle --file="$SCRIPT_DIR/brewfiles/Brewfile.ai" --no-lock
+    brew bundle --file="$SCRIPT_DIR/brewfiles/Brewfile.ai"
 
     # Cortex Code CLI (npm)
     info "󰧑 Checking Cortex Code CLI"

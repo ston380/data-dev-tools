@@ -30,6 +30,10 @@ export PATH="$HOME/.duckdb/cli/latest:$PATH"
 export PATH="$HOME/.local/bin/uv:$PATH"
 export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
+# ODBC
+export ODBCINI="$HOME/Library/ODBC/odbc.ini"
+export ODBCINSTINI="$HOME/Library/ODBC/odbcinst.ini"
+
 # Environment
 . "$HOME/.local/bin/env"
 
