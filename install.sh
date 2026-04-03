@@ -654,6 +654,16 @@ config_config() {
         ok "Copied btop.conf to ~/.config/btop/"
     fi
 
+    # Skitty-notes (Neovim sticky notes via linkarzu/dotfiles-latest)
+    info " Installing skitty-notes (neobean Neovim config)"
+    if [ -d "$HOME/.config/linkarzu/dotfiles-latest" ]; then
+        warn "~/.config/linkarzu/dotfiles-latest already exists - skipping"
+    else
+        mkdir -p "$HOME/.config/linkarzu"
+        git clone https://github.com/linkarzu/dotfiles-latest.git "$HOME/.config/linkarzu/dotfiles-latest"
+        ok "Cloned linkarzu/dotfiles-latest for skitty-notes"
+    fi
+
     # Starship config
     info " Installing Starship config"
     mkdir -p "$HOME/.config"
