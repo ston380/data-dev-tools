@@ -80,7 +80,7 @@ Installed automatically if missing:
 | Starship | `starship` | Customizable shell prompt with context for Git, Python, cloud, and more |
 | Atuin | `atuin` | Searchable, synced shell history with context (directory, exit code, duration) |
 | zoxide | `z` | Smarter `cd` that learns your most-used directories |
-| mactop | `mactop` | Real-time macOS system monitor for CPU, GPU, memory, and power |
+| btop | `btop` | System resource monitor for CPU, memory, disks, network, and processes |
 | llmfit | `llmfit` | Find LLM models that fit your hardware specs |
 
 ### Package Managers

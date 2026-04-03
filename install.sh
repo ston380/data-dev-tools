@@ -632,6 +632,28 @@ config_config() {
         ok "Copied aerospace.toml to ~/.aerospace.toml"
     fi
 
+    # Sketchybar config
+    info " Installing Sketchybar config"
+    mkdir -p "$HOME/.config/sketchybar/plugins"
+    if [ -f "$HOME/.config/sketchybar/sketchybarrc" ]; then
+        warn "~/.config/sketchybar/sketchybarrc already exists - skipping (check $SCRIPT_DIR/dotfiles/sketchybar/ for reference)"
+    else
+        cp "$SCRIPT_DIR/dotfiles/sketchybar/sketchybarrc" "$HOME/.config/sketchybar/sketchybarrc"
+        cp "$SCRIPT_DIR/dotfiles/sketchybar/plugins/"* "$HOME/.config/sketchybar/plugins/"
+        chmod +x "$HOME/.config/sketchybar/plugins/"*
+        ok "Copied sketchybar config to ~/.config/sketchybar/"
+    fi
+
+    # btop config
+    info " Installing btop config"
+    mkdir -p "$HOME/.config/btop"
+    if [ -f "$HOME/.config/btop/btop.conf" ]; then
+        warn "~/.config/btop/btop.conf already exists - skipping (check $SCRIPT_DIR/dotfiles/btop/btop.conf for reference)"
+    else
+        cp "$SCRIPT_DIR/dotfiles/btop/btop.conf" "$HOME/.config/btop/btop.conf"
+        ok "Copied btop.conf to ~/.config/btop/"
+    fi
+
     # Starship config
     info " Installing Starship config"
     mkdir -p "$HOME/.config"
