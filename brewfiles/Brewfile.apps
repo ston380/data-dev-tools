@@ -78,6 +78,7 @@ cask "font-zed-mono-nerd-font"
 cask "docker"                        # Docker Desktop
 cask "anaconda"                      # Python 3 + data science packages
 brew "FelixKratz/formulae/sketchybar"  # Customizable macOS status bar
+brew "FelixKratz/formulae/borders"     # Window border highlights (JankyBorders)
 cask "nikitabobko/tap/aerospace"    # Tiling window manager
 cask "visual-studio-code"           # VS Code
 cask "dbeaver-community"            # DBeaver database tool
