@@ -93,6 +93,7 @@ cask "microsoft-teams"              # Microsoft Teams
 cask "onedrive"                     # Microsoft OneDrive
 cask "google-drive"                 # Google Drive
 cask "raycast"                      # Spotlight replacement and launcher
+cask "karabiner-elements"           # Keyboard customizer
 cask "logitech-g-hub"              # Logitech G Hub
 
 # Mac App Store (requires `mas` CLI)
