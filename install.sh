@@ -644,6 +644,17 @@ config_config() {
         ok "Copied sketchybar config to ~/.config/sketchybar/"
     fi
 
+    # Borders config
+    info " Installing JankyBorders config"
+    mkdir -p "$HOME/.config/borders"
+    if [ -f "$HOME/.config/borders/bordersrc" ]; then
+        warn "~/.config/borders/bordersrc already exists - skipping (check $SCRIPT_DIR/dotfiles/borders/bordersrc for reference)"
+    else
+        cp "$SCRIPT_DIR/dotfiles/borders/bordersrc" "$HOME/.config/borders/bordersrc"
+        chmod +x "$HOME/.config/borders/bordersrc"
+        ok "Copied bordersrc to ~/.config/borders/"
+    fi
+
     # btop config
     info " Installing btop config"
     mkdir -p "$HOME/.config/btop"
