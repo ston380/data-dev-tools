@@ -219,6 +219,28 @@ install_data() {
         fi
     fi
 
+    # Playwright
+    info "󰆼 Checking Playwright"
+    if command_exists playwright; then
+        ok "Already installed"
+    else
+        info " Installing Playwright via pipx..."
+        if command_exists pipx; then
+            pipx install playwright
+        elif command_exists pip3; then
+            pip3 install --user playwright
+        else
+            fail "pipx/pip3 not found - install Python first, then run: pipx install playwright"
+        fi
+    fi
+
+    # Install Playwright browsers
+    if command_exists playwright; then
+        info "󰆼 Installing Playwright browsers"
+        playwright install
+        ok "Playwright browsers installed"
+    fi
+
     # Oracle Instant Client
     info "󰆼 Checking Oracle Instant Client"
     if [ -d "/opt/oracle/instantclient" ] || [ -d "$HOME/instantclient" ] || ls /usr/local/lib/libclntsh* &>/dev/null 2>&1; then
