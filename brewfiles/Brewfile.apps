@@ -95,6 +95,7 @@ cask "raycast"                      # Spotlight replacement and launcher
 cask "karabiner-elements"           # Keyboard customizer
 cask "logitech-g-hub"              # Logitech G Hub
 cask "obsidian"                    # Obsidian note-taking
+cask "telegram"                    # Telegram messaging
 
 # Mac App Store (requires `mas` CLI)
 brew "mas"                          # Mac App Store CLI
