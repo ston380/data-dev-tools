@@ -77,7 +77,6 @@ cask "font-zed-mono-nerd-font"
 
 cask "docker"                        # Docker Desktop
 cask "anaconda"                      # Python 3 + data science packages
-brew "FelixKratz/formulae/sketchybar"  # Customizable macOS status bar
 brew "FelixKratz/formulae/borders"     # Window border highlights (JankyBorders)
 cask "nikitabobko/tap/aerospace"    # Tiling window manager
 cask "visual-studio-code"           # VS Code
@@ -95,6 +94,7 @@ cask "google-drive"                 # Google Drive
 cask "raycast"                      # Spotlight replacement and launcher
 cask "karabiner-elements"           # Keyboard customizer
 cask "logitech-g-hub"              # Logitech G Hub
+cask "obsidian"                    # Obsidian note-taking
 
 # Mac App Store (requires `mas` CLI)
 brew "mas"                          # Mac App Store CLI

@@ -7,7 +7,7 @@ config-version = 2
 
 # You can use it to add commands that run after AeroSpace startup.
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
+after-startup-command = ['exec-and-forget sketchybar']
 
 # Start AeroSpace at login
 start-at-login = true
@@ -45,11 +45,16 @@ automatically-unhide-macos-hidden-apps = false
 # even when they are invisible.
 # This config version is only available since 'config-version = 2'
 # Fallback value (if you omit the key): persistent-workspaces = []
-persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+persistent-workspaces = ["1", "2", "3", "4", "5"]
 
 # A callback that runs every time binding mode changes
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
+# Notify sketchybar on workspace change
+exec-on-workspace-change = ['/bin/bash', '-c',
+  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE'
+]
+
 on-mode-changed = []
 
 # Possible values: (qwerty|dvorak|colemak)
@@ -132,10 +137,6 @@ on-mode-changed = []
     alt-cmd-3 = 'workspace 3'
     alt-cmd-4 = 'workspace 4'
     alt-cmd-5 = 'workspace 5'
-    alt-cmd-6 = 'workspace 6'
-    alt-cmd-7 = 'workspace 7'
-    alt-cmd-8 = 'workspace 8'
-    alt-cmd-9 = 'workspace 9'
     # -- Layout --
     alt-cmd-f = 'fullscreen'
     alt-cmd-t = 'layout floating tiling'
@@ -156,10 +157,6 @@ on-mode-changed = []
     alt-cmd-shift-3 = 'move-node-to-workspace 3'
     alt-cmd-shift-4 = 'move-node-to-workspace 4'
     alt-cmd-shift-5 = 'move-node-to-workspace 5'
-    alt-cmd-shift-6 = 'move-node-to-workspace 6'
-    alt-cmd-shift-7 = 'move-node-to-workspace 7'
-    alt-cmd-shift-8 = 'move-node-to-workspace 8'
-    alt-cmd-shift-9 = 'move-node-to-workspace 9'
     # -- Flatten/normalize --
     alt-cmd-shift-f = 'flatten-workspace-tree'
 

@@ -251,6 +251,21 @@ install_data() {
         echo "    Install the Basic and SQL*Plus packages, then configure DBeaver:"
         echo "      DBeaver → Database → Driver Manager → Oracle → Libraries → Add Folder → select instantclient path"
     fi
+
+    # Marp (Markdown presentation ecosystem)
+    info "󰆼 Checking Marp packages"
+    if command_exists npm; then
+        for pkg in "@marp-team/marpit" "@marp-team/marp-core" "@marp-team/marp-cli"; do
+            if npm list -g "$pkg" &>/dev/null; then
+                ok "$pkg already installed"
+            else
+                info " Installing $pkg..."
+                npm install -g "$pkg" || warn "Failed to install $pkg"
+            fi
+        done
+    else
+        fail "npm not found - install Node.js first, then re-run to install Marp packages"
+    fi
 }
 
 config_data() {
@@ -263,7 +278,80 @@ install_terminal() {
 }
 
 config_terminal() {
-    :
+    # cmux
+    info " Configuring cmux"
+    defaults write com.cmuxterm.app appearanceMode -string "dark"
+    defaults write com.cmuxterm.app appIconMode -string "dark"
+    defaults write com.cmuxterm.app appLanguage -string "system"
+    # Sidebar
+    defaults write com.cmuxterm.app sidebarActiveTabIndicatorStyle -string "solidFill"
+    defaults write com.cmuxterm.app sidebarPreset -string "nativeSidebar"
+    defaults write com.cmuxterm.app sidebarMaterial -string "sidebar"
+    defaults write com.cmuxterm.app sidebarBlendMode -string "withinWindow"
+    defaults write com.cmuxterm.app sidebarBlurOpacity -integer 1
+    defaults write com.cmuxterm.app sidebarTintHex -string "#000000"
+    defaults write com.cmuxterm.app sidebarTintOpacity -string "0.18"
+    defaults write com.cmuxterm.app sidebarCornerRadius -integer 0
+    defaults write com.cmuxterm.app sidebarHideAllDetails -bool false
+    defaults write com.cmuxterm.app sidebarState -string "followWindow"
+    ok "cmux: sidebar configured (solid fill, native preset, dark)"
+    # Notifications
+    defaults write com.cmuxterm.app notificationSound -string "Hero"
+    defaults write com.cmuxterm.app notificationPaneRingEnabled -bool false
+    ok "cmux: notifications configured (Hero sound, ring disabled)"
+    # Browser
+    defaults write com.cmuxterm.app browserThemeMode -string "system"
+    defaults write com.cmuxterm.app browserOpenSidebarPullRequestLinksInCmuxBrowser -bool false
+    ok "cmux: browser configured (system theme)"
+
+    # btop config
+    info " Installing btop config"
+    mkdir -p "$HOME/.config/btop"
+    if [ -f "$HOME/.config/btop/btop.conf" ]; then
+        warn "~/.config/btop/btop.conf already exists - skipping (check $SCRIPT_DIR/dotfiles/btop/btop.conf for reference)"
+    else
+        cp "$SCRIPT_DIR/dotfiles/btop/btop.conf" "$HOME/.config/btop/btop.conf"
+        ok "Copied btop.conf to ~/.config/btop/"
+    fi
+
+    # Skitty-notes (Neovim sticky notes via linkarzu/dotfiles-latest)
+    info " Installing skitty-notes (neobean Neovim config)"
+    if [ -d "$HOME/.config/linkarzu/dotfiles-latest" ]; then
+        warn "~/.config/linkarzu/dotfiles-latest already exists - skipping"
+    else
+        mkdir -p "$HOME/.config/linkarzu"
+        git clone https://github.com/linkarzu/dotfiles-latest.git "$HOME/.config/linkarzu/dotfiles-latest"
+        ok "Cloned linkarzu/dotfiles-latest for skitty-notes"
+    fi
+
+    # Starship config
+    info " Installing Starship config"
+    mkdir -p "$HOME/.config"
+    if [ -f "$HOME/.config/starship.toml" ]; then
+        warn "~/.config/starship.toml already exists - skipping (check $SCRIPT_DIR/dotfiles/starship.toml for reference)"
+    else
+        cp "$SCRIPT_DIR/dotfiles/starship.toml" "$HOME/.config/starship.toml"
+        ok "Copied starship.toml to ~/.config/starship.toml"
+    fi
+
+    # Ghostty config
+    info " Installing Ghostty config"
+    mkdir -p "$HOME/.config/ghostty"
+    if [ -f "$HOME/.config/ghostty/config" ]; then
+        warn "~/.config/ghostty/config already exists - skipping (check $SCRIPT_DIR/dotfiles/ghostty/config for reference)"
+    else
+        cp "$SCRIPT_DIR/dotfiles/ghostty/config" "$HOME/.config/ghostty/config"
+        ok "Copied ghostty config to ~/.config/ghostty/config"
+    fi
+
+    # Zsh config
+    info " Installing .zshrc"
+    if [ -f "$HOME/.zshrc" ]; then
+        warn "~/.zshrc already exists - skipping (check $SCRIPT_DIR/dotfiles/.zshrc for reference)"
+    else
+        cp "$SCRIPT_DIR/dotfiles/.zshrc" "$HOME/.zshrc"
+        ok "Copied .zshrc to ~/.zshrc"
+    fi
 }
 
 install_apps() {
@@ -379,34 +467,50 @@ install_apps() {
     fi
 
     ok "Apps: $current/$total processed"
+
+    # Sketchybar (FelixKratz dotfiles installer)
+    info " Checking sketchybar"
+    if command_exists sketchybar; then
+        ok "Already installed"
+    else
+        info " Installing sketchybar via FelixKratz installer..."
+        curl -L https://raw.githubusercontent.com/FelixKratz/dotfiles/master/install_sketchybar.sh | sh
+        ok "Installed sketchybar"
+    fi
 }
 
 config_apps() {
-    # cmux
-    info " Configuring cmux"
-    defaults write com.cmuxterm.app appearanceMode -string "dark"
-    defaults write com.cmuxterm.app appIconMode -string "dark"
-    defaults write com.cmuxterm.app appLanguage -string "system"
-    # Sidebar
-    defaults write com.cmuxterm.app sidebarActiveTabIndicatorStyle -string "solidFill"
-    defaults write com.cmuxterm.app sidebarPreset -string "nativeSidebar"
-    defaults write com.cmuxterm.app sidebarMaterial -string "sidebar"
-    defaults write com.cmuxterm.app sidebarBlendMode -string "withinWindow"
-    defaults write com.cmuxterm.app sidebarBlurOpacity -integer 1
-    defaults write com.cmuxterm.app sidebarTintHex -string "#000000"
-    defaults write com.cmuxterm.app sidebarTintOpacity -string "0.18"
-    defaults write com.cmuxterm.app sidebarCornerRadius -integer 0
-    defaults write com.cmuxterm.app sidebarHideAllDetails -bool false
-    defaults write com.cmuxterm.app sidebarState -string "followWindow"
-    ok "cmux: sidebar configured (solid fill, native preset, dark)"
-    # Notifications
-    defaults write com.cmuxterm.app notificationSound -string "Hero"
-    defaults write com.cmuxterm.app notificationPaneRingEnabled -bool false
-    ok "cmux: notifications configured (Hero sound, ring disabled)"
-    # Browser
-    defaults write com.cmuxterm.app browserThemeMode -string "system"
-    defaults write com.cmuxterm.app browserOpenSidebarPullRequestLinksInCmuxBrowser -bool false
-    ok "cmux: browser configured (system theme)"
+    # AeroSpace config
+    info " Installing AeroSpace config"
+    if [ -f "$HOME/.aerospace.toml" ]; then
+        warn "~/.aerospace.toml already exists - skipping (check $SCRIPT_DIR/aerospace.toml for reference)"
+    else
+        cp "$SCRIPT_DIR/aerospace.toml" "$HOME/.aerospace.toml"
+        ok "Copied aerospace.toml to ~/.aerospace.toml"
+    fi
+
+    # Sketchybar config
+    info " Installing Sketchybar config"
+    mkdir -p "$HOME/.config/sketchybar/plugins"
+    if [ -f "$HOME/.config/sketchybar/sketchybarrc" ]; then
+        warn "~/.config/sketchybar/sketchybarrc already exists - skipping (check $SCRIPT_DIR/dotfiles/sketchybar/ for reference)"
+    else
+        cp "$SCRIPT_DIR/dotfiles/sketchybar/sketchybarrc" "$HOME/.config/sketchybar/sketchybarrc"
+        cp "$SCRIPT_DIR/dotfiles/sketchybar/plugins/"* "$HOME/.config/sketchybar/plugins/"
+        chmod +x "$HOME/.config/sketchybar/plugins/"*
+        ok "Copied sketchybar config to ~/.config/sketchybar/"
+    fi
+
+    # Borders config
+    info " Installing JankyBorders config"
+    mkdir -p "$HOME/.config/borders"
+    if [ -f "$HOME/.config/borders/bordersrc" ]; then
+        warn "~/.config/borders/bordersrc already exists - skipping (check $SCRIPT_DIR/dotfiles/borders/bordersrc for reference)"
+    else
+        cp "$SCRIPT_DIR/dotfiles/borders/bordersrc" "$HOME/.config/borders/bordersrc"
+        chmod +x "$HOME/.config/borders/bordersrc"
+        ok "Copied bordersrc to ~/.config/borders/"
+    fi
 }
 
 install_ai() {
@@ -492,7 +596,16 @@ install_ai() {
 }
 
 config_ai() {
-    :
+    # Claude Code statusline
+    info "󰧑 Installing Claude Code statusline config"
+    mkdir -p "$HOME/.claude"
+    if [ -f "$HOME/.claude/statusline-command.sh" ]; then
+        warn "~/.claude/statusline-command.sh already exists - skipping (check $SCRIPT_DIR/dotfiles/claude/statusline-command.sh for reference)"
+    else
+        cp "$SCRIPT_DIR/dotfiles/claude/statusline-command.sh" "$HOME/.claude/statusline-command.sh"
+        chmod +x "$HOME/.claude/statusline-command.sh"
+        ok "Copied statusline-command.sh to ~/.claude/"
+    fi
 }
 
 install_vscode() {
@@ -547,6 +660,9 @@ install_vscode() {
         "gimly81.qlik"
         "q-masters.vscode-qlik"
         "vinzent.qlikanswers"
+
+        # Presentations
+        "marp-team.marp-vscode"
 
         # Themes
         "github.github-vscode-theme"
@@ -605,6 +721,10 @@ config_config() {
     defaults write com.apple.controlcenter "NSStatusItem VisibleCC WiFi" -bool true
     ok "Menu bar: battery and Wi-Fi visible"
 
+    # Hide macOS menu bar (replaced by sketchybar)
+    defaults write NSGlobalDomain _HIHideMenuBar -int 1
+    ok "Menu bar: always hidden (using sketchybar)"
+
     # Appearance
     defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
     defaults write NSGlobalDomain AppleInterfaceStyleSwitchesAutomatically -bool true
@@ -644,87 +764,6 @@ config_config() {
     defaults write com.apple.screencapture location -string "$HOME/Pictures/Screenshots"
     defaults write com.apple.screencapture type -string "png"
     ok "Screenshots: PNG format, saved to ~/Pictures/Screenshots"
-
-    # AeroSpace config
-    info " Installing AeroSpace config"
-    if [ -f "$HOME/.aerospace.toml" ]; then
-        warn "~/.aerospace.toml already exists - skipping (check $SCRIPT_DIR/aerospace.toml for reference)"
-    else
-        cp "$SCRIPT_DIR/aerospace.toml" "$HOME/.aerospace.toml"
-        ok "Copied aerospace.toml to ~/.aerospace.toml"
-    fi
-
-    # Sketchybar config
-    info " Installing Sketchybar config"
-    mkdir -p "$HOME/.config/sketchybar/plugins"
-    if [ -f "$HOME/.config/sketchybar/sketchybarrc" ]; then
-        warn "~/.config/sketchybar/sketchybarrc already exists - skipping (check $SCRIPT_DIR/dotfiles/sketchybar/ for reference)"
-    else
-        cp "$SCRIPT_DIR/dotfiles/sketchybar/sketchybarrc" "$HOME/.config/sketchybar/sketchybarrc"
-        cp "$SCRIPT_DIR/dotfiles/sketchybar/plugins/"* "$HOME/.config/sketchybar/plugins/"
-        chmod +x "$HOME/.config/sketchybar/plugins/"*
-        ok "Copied sketchybar config to ~/.config/sketchybar/"
-    fi
-
-    # Borders config
-    info " Installing JankyBorders config"
-    mkdir -p "$HOME/.config/borders"
-    if [ -f "$HOME/.config/borders/bordersrc" ]; then
-        warn "~/.config/borders/bordersrc already exists - skipping (check $SCRIPT_DIR/dotfiles/borders/bordersrc for reference)"
-    else
-        cp "$SCRIPT_DIR/dotfiles/borders/bordersrc" "$HOME/.config/borders/bordersrc"
-        chmod +x "$HOME/.config/borders/bordersrc"
-        ok "Copied bordersrc to ~/.config/borders/"
-    fi
-
-    # btop config
-    info " Installing btop config"
-    mkdir -p "$HOME/.config/btop"
-    if [ -f "$HOME/.config/btop/btop.conf" ]; then
-        warn "~/.config/btop/btop.conf already exists - skipping (check $SCRIPT_DIR/dotfiles/btop/btop.conf for reference)"
-    else
-        cp "$SCRIPT_DIR/dotfiles/btop/btop.conf" "$HOME/.config/btop/btop.conf"
-        ok "Copied btop.conf to ~/.config/btop/"
-    fi
-
-    # Skitty-notes (Neovim sticky notes via linkarzu/dotfiles-latest)
-    info " Installing skitty-notes (neobean Neovim config)"
-    if [ -d "$HOME/.config/linkarzu/dotfiles-latest" ]; then
-        warn "~/.config/linkarzu/dotfiles-latest already exists - skipping"
-    else
-        mkdir -p "$HOME/.config/linkarzu"
-        git clone https://github.com/linkarzu/dotfiles-latest.git "$HOME/.config/linkarzu/dotfiles-latest"
-        ok "Cloned linkarzu/dotfiles-latest for skitty-notes"
-    fi
-
-    # Starship config
-    info " Installing Starship config"
-    mkdir -p "$HOME/.config"
-    if [ -f "$HOME/.config/starship.toml" ]; then
-        warn "~/.config/starship.toml already exists - skipping (check $SCRIPT_DIR/dotfiles/starship.toml for reference)"
-    else
-        cp "$SCRIPT_DIR/dotfiles/starship.toml" "$HOME/.config/starship.toml"
-        ok "Copied starship.toml to ~/.config/starship.toml"
-    fi
-
-    # Ghostty config
-    info " Installing Ghostty config"
-    mkdir -p "$HOME/.config/ghostty"
-    if [ -f "$HOME/.config/ghostty/config" ]; then
-        warn "~/.config/ghostty/config already exists - skipping (check $SCRIPT_DIR/dotfiles/ghostty/config for reference)"
-    else
-        cp "$SCRIPT_DIR/dotfiles/ghostty/config" "$HOME/.config/ghostty/config"
-        ok "Copied ghostty config to ~/.config/ghostty/config"
-    fi
-
-    # Zsh config
-    info " Installing .zshrc"
-    if [ -f "$HOME/.zshrc" ]; then
-        warn "~/.zshrc already exists - skipping (check $SCRIPT_DIR/dotfiles/.zshrc for reference)"
-    else
-        cp "$SCRIPT_DIR/dotfiles/.zshrc" "$HOME/.zshrc"
-        ok "Copied .zshrc to ~/.zshrc"
-    fi
 
     # Apply changes
     killall Dock
