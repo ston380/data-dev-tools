@@ -12,6 +12,16 @@ ok()    { printf "\033[1;32m   %s\033[0m\n" "$1"; }
 warn()  { printf "\033[1;33m   %s\033[0m\n" "$1"; }
 fail()  { printf "\033[1;31m   %s\033[0m\n" "$1"; }
 
+# Returns 0 (overwrite) or 1 (skip). Usage: prompt_overwrite <dest>
+prompt_overwrite() {
+    local dest="$1"
+    warn "$dest already exists."
+    printf "   Overwrite? [y/N] "
+    local reply
+    read -r reply </dev/tty
+    [[ "$reply" =~ ^[Yy]$ ]]
+}
+
 command_exists() { command -v "$1" &>/dev/null; }
 
 usage() {
@@ -308,7 +318,10 @@ config_terminal() {
     info " Installing btop config"
     mkdir -p "$HOME/.config/btop"
     if [ -f "$HOME/.config/btop/btop.conf" ]; then
-        warn "~/.config/btop/btop.conf already exists - skipping (check $SCRIPT_DIR/dotfiles/btop/btop.conf for reference)"
+        if prompt_overwrite "~/.config/btop/btop.conf"; then
+            cp "$SCRIPT_DIR/dotfiles/btop/btop.conf" "$HOME/.config/btop/btop.conf"
+            ok "Copied btop.conf to ~/.config/btop/"
+        fi
     else
         cp "$SCRIPT_DIR/dotfiles/btop/btop.conf" "$HOME/.config/btop/btop.conf"
         ok "Copied btop.conf to ~/.config/btop/"
@@ -317,7 +330,11 @@ config_terminal() {
     # Skitty-notes (Neovim sticky notes via linkarzu/dotfiles-latest)
     info " Installing skitty-notes (neobean Neovim config)"
     if [ -d "$HOME/.config/linkarzu/dotfiles-latest" ]; then
-        warn "~/.config/linkarzu/dotfiles-latest already exists - skipping"
+        if prompt_overwrite "~/.config/linkarzu/dotfiles-latest"; then
+            rm -rf "$HOME/.config/linkarzu/dotfiles-latest"
+            git clone https://github.com/linkarzu/dotfiles-latest.git "$HOME/.config/linkarzu/dotfiles-latest"
+            ok "Cloned linkarzu/dotfiles-latest for skitty-notes"
+        fi
     else
         mkdir -p "$HOME/.config/linkarzu"
         git clone https://github.com/linkarzu/dotfiles-latest.git "$HOME/.config/linkarzu/dotfiles-latest"
@@ -328,7 +345,10 @@ config_terminal() {
     info " Installing Starship config"
     mkdir -p "$HOME/.config"
     if [ -f "$HOME/.config/starship.toml" ]; then
-        warn "~/.config/starship.toml already exists - skipping (check $SCRIPT_DIR/dotfiles/starship.toml for reference)"
+        if prompt_overwrite "~/.config/starship.toml"; then
+            cp "$SCRIPT_DIR/dotfiles/starship.toml" "$HOME/.config/starship.toml"
+            ok "Copied starship.toml to ~/.config/starship.toml"
+        fi
     else
         cp "$SCRIPT_DIR/dotfiles/starship.toml" "$HOME/.config/starship.toml"
         ok "Copied starship.toml to ~/.config/starship.toml"
@@ -338,7 +358,10 @@ config_terminal() {
     info " Installing Ghostty config"
     mkdir -p "$HOME/.config/ghostty"
     if [ -f "$HOME/.config/ghostty/config" ]; then
-        warn "~/.config/ghostty/config already exists - skipping (check $SCRIPT_DIR/dotfiles/ghostty/config for reference)"
+        if prompt_overwrite "~/.config/ghostty/config"; then
+            cp "$SCRIPT_DIR/dotfiles/ghostty/config" "$HOME/.config/ghostty/config"
+            ok "Copied ghostty config to ~/.config/ghostty/config"
+        fi
     else
         cp "$SCRIPT_DIR/dotfiles/ghostty/config" "$HOME/.config/ghostty/config"
         ok "Copied ghostty config to ~/.config/ghostty/config"
@@ -347,7 +370,10 @@ config_terminal() {
     # Zsh config
     info " Installing .zshrc"
     if [ -f "$HOME/.zshrc" ]; then
-        warn "~/.zshrc already exists - skipping (check $SCRIPT_DIR/dotfiles/.zshrc for reference)"
+        if prompt_overwrite "~/.zshrc"; then
+            cp "$SCRIPT_DIR/dotfiles/.zshrc" "$HOME/.zshrc"
+            ok "Copied .zshrc to ~/.zshrc"
+        fi
     else
         cp "$SCRIPT_DIR/dotfiles/.zshrc" "$HOME/.zshrc"
         ok "Copied .zshrc to ~/.zshrc"
@@ -469,43 +495,55 @@ install_apps() {
     ok "Apps: $current/$total processed"
 
     # Sketchybar (FelixKratz dotfiles installer)
-    info " Checking sketchybar"
-    if command_exists sketchybar; then
-        ok "Already installed"
-    else
-        info " Installing sketchybar via FelixKratz installer..."
-        curl -L https://raw.githubusercontent.com/FelixKratz/dotfiles/master/install_sketchybar.sh | sh
-        ok "Installed sketchybar"
-    fi
+    # info " Checking sketchybar"
+    # if command_exists sketchybar; then
+    #     ok "Already installed"
+    # else
+    #     info " Installing sketchybar via FelixKratz installer..."
+    #     curl -L https://raw.githubusercontent.com/FelixKratz/dotfiles/master/install_sketchybar.sh | sh
+    #     ok "Installed sketchybar"
+    # fi
 }
 
 config_apps() {
     # AeroSpace config
-    info " Installing AeroSpace config"
-    if [ -f "$HOME/.aerospace.toml" ]; then
-        warn "~/.aerospace.toml already exists - skipping (check $SCRIPT_DIR/aerospace.toml for reference)"
-    else
-        cp "$SCRIPT_DIR/aerospace.toml" "$HOME/.aerospace.toml"
-        ok "Copied aerospace.toml to ~/.aerospace.toml"
-    fi
+    # info " Installing AeroSpace config"
+    # if [ -f "$HOME/.aerospace.toml" ]; then
+    #     if prompt_overwrite "~/.aerospace.toml"; then
+    #         cp "$SCRIPT_DIR/aerospace.toml" "$HOME/.aerospace.toml"
+    #         ok "Copied aerospace.toml to ~/.aerospace.toml"
+    #     fi
+    # else
+    #     cp "$SCRIPT_DIR/aerospace.toml" "$HOME/.aerospace.toml"
+    #     ok "Copied aerospace.toml to ~/.aerospace.toml"
+    # fi
 
     # Sketchybar config
-    info " Installing Sketchybar config"
-    mkdir -p "$HOME/.config/sketchybar/plugins"
-    if [ -f "$HOME/.config/sketchybar/sketchybarrc" ]; then
-        warn "~/.config/sketchybar/sketchybarrc already exists - skipping (check $SCRIPT_DIR/dotfiles/sketchybar/ for reference)"
-    else
-        cp "$SCRIPT_DIR/dotfiles/sketchybar/sketchybarrc" "$HOME/.config/sketchybar/sketchybarrc"
-        cp "$SCRIPT_DIR/dotfiles/sketchybar/plugins/"* "$HOME/.config/sketchybar/plugins/"
-        chmod +x "$HOME/.config/sketchybar/plugins/"*
-        ok "Copied sketchybar config to ~/.config/sketchybar/"
-    fi
+    # info " Installing Sketchybar config"
+    # mkdir -p "$HOME/.config/sketchybar/plugins"
+    # if [ -f "$HOME/.config/sketchybar/sketchybarrc" ]; then
+    #     if prompt_overwrite "~/.config/sketchybar/sketchybarrc"; then
+    #         cp "$SCRIPT_DIR/dotfiles/sketchybar/sketchybarrc" "$HOME/.config/sketchybar/sketchybarrc"
+    #         cp "$SCRIPT_DIR/dotfiles/sketchybar/plugins/"* "$HOME/.config/sketchybar/plugins/"
+    #         chmod +x "$HOME/.config/sketchybar/plugins/"*
+    #         ok "Copied sketchybar config to ~/.config/sketchybar/"
+    #     fi
+    # else
+    #     cp "$SCRIPT_DIR/dotfiles/sketchybar/sketchybarrc" "$HOME/.config/sketchybar/sketchybarrc"
+    #     cp "$SCRIPT_DIR/dotfiles/sketchybar/plugins/"* "$HOME/.config/sketchybar/plugins/"
+    #     chmod +x "$HOME/.config/sketchybar/plugins/"*
+    #     ok "Copied sketchybar config to ~/.config/sketchybar/"
+    # fi
 
     # Borders config
     info " Installing JankyBorders config"
     mkdir -p "$HOME/.config/borders"
     if [ -f "$HOME/.config/borders/bordersrc" ]; then
-        warn "~/.config/borders/bordersrc already exists - skipping (check $SCRIPT_DIR/dotfiles/borders/bordersrc for reference)"
+        if prompt_overwrite "~/.config/borders/bordersrc"; then
+            cp "$SCRIPT_DIR/dotfiles/borders/bordersrc" "$HOME/.config/borders/bordersrc"
+            chmod +x "$HOME/.config/borders/bordersrc"
+            ok "Copied bordersrc to ~/.config/borders/"
+        fi
     else
         cp "$SCRIPT_DIR/dotfiles/borders/bordersrc" "$HOME/.config/borders/bordersrc"
         chmod +x "$HOME/.config/borders/bordersrc"
@@ -600,7 +638,11 @@ config_ai() {
     info "󰧑 Installing Claude Code statusline config"
     mkdir -p "$HOME/.claude"
     if [ -f "$HOME/.claude/statusline-command.sh" ]; then
-        warn "~/.claude/statusline-command.sh already exists - skipping (check $SCRIPT_DIR/dotfiles/claude/statusline-command.sh for reference)"
+        if prompt_overwrite "~/.claude/statusline-command.sh"; then
+            cp "$SCRIPT_DIR/dotfiles/claude/statusline-command.sh" "$HOME/.claude/statusline-command.sh"
+            chmod +x "$HOME/.claude/statusline-command.sh"
+            ok "Copied statusline-command.sh to ~/.claude/"
+        fi
     else
         cp "$SCRIPT_DIR/dotfiles/claude/statusline-command.sh" "$HOME/.claude/statusline-command.sh"
         chmod +x "$HOME/.claude/statusline-command.sh"
