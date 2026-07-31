@@ -12,6 +12,7 @@ brew "nvm"                          # Node.js version manager
 brew "llmfit"                       # Find models for your hardware
 brew "fastfetch"                    # System info display (actively maintained neofetch successor)
 brew "tty-clock"                    # Terminal clock
+brew "cmatrix"                      # Matrix-style terminal screensaver
 brew "neovim"                       # Hyperextensible text editor
 brew "jq"                           # JSON processor
 
