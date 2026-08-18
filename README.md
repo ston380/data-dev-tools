@@ -119,6 +119,7 @@ Installed automatically if missing:
 | Microsoft OneDrive | Cloud file storage and sync for Microsoft 365 |
 | Google Drive | Cloud file storage and sync for Google Workspace |
 | Logitech G Hub | Configuration software for Logitech peripherals |
+| OpenLogi | Local-first alternative to Logitech Options+ for HID++ devices |
 | Claude Desktop | Anthropic's Claude AI assistant |
 
 ### Mac App Store

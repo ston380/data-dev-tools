@@ -94,6 +94,7 @@ cask "google-drive"                 # Google Drive
 cask "raycast"                      # Spotlight replacement and launcher
 cask "karabiner-elements"           # Keyboard customizer
 cask "logitech-g-hub"              # Logitech G Hub
+cask "openlogi"                    # Local-first Logitech Options+ alternative (HID++)
 cask "obsidian"                    # Obsidian note-taking
 cask "telegram"                    # Telegram messaging
 
