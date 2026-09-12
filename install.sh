@@ -157,6 +157,32 @@ else
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+# ------------------------------------------------------------
+# Pre-flight: Homebrew tap trust
+# ------------------------------------------------------------
+# Homebrew 6+ ignores formulae and casks from third-party taps until they are
+# explicitly trusted. Trust only the specific items this repo installs, rather
+# than whole taps. Add tap-qualified casks with `brew trust --cask <name>`.
+TRUSTED_FORMULAE=(
+    "databricks/tap/databricks"              # Databricks CLI (cloud)
+    "dbt-labs/dbt-cli/dbt-cloud-cli"         # dbt Cloud CLI (cloud)
+    "microsoft/mssql-release/msodbcsql18"    # SQL Server ODBC driver (data)
+    "microsoft/mssql-release/mssql-tools18"  # sqlcmd and bcp (data)
+)
+
+info "󱄖 Trusting third-party tap formulae"
+if brew trust --help &>/dev/null; then
+    for formula in "${TRUSTED_FORMULAE[@]}"; do
+        if brew trust --formula "$formula" &>/dev/null; then
+            ok "$formula"
+        else
+            warn "Failed to trust $formula"
+        fi
+    done
+else
+    ok "brew trust not available in this Homebrew version - skipping"
+fi
+
 # ============================================================
 # Install functions
 # ============================================================
@@ -535,20 +561,8 @@ config_apps() {
     #     ok "Copied sketchybar config to ~/.config/sketchybar/"
     # fi
 
-    # Borders config
-    info " Installing JankyBorders config"
-    mkdir -p "$HOME/.config/borders"
-    if [ -f "$HOME/.config/borders/bordersrc" ]; then
-        if prompt_overwrite "~/.config/borders/bordersrc"; then
-            cp "$SCRIPT_DIR/dotfiles/borders/bordersrc" "$HOME/.config/borders/bordersrc"
-            chmod +x "$HOME/.config/borders/bordersrc"
-            ok "Copied bordersrc to ~/.config/borders/"
-        fi
-    else
-        cp "$SCRIPT_DIR/dotfiles/borders/bordersrc" "$HOME/.config/borders/bordersrc"
-        chmod +x "$HOME/.config/borders/bordersrc"
-        ok "Copied bordersrc to ~/.config/borders/"
-    fi
+    # Nothing to configure while AeroSpace and Sketchybar are disabled
+    :
 }
 
 install_ai() {
