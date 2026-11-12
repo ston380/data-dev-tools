@@ -582,17 +582,14 @@ install_ai() {
         fi
     fi
 
-    # Claude Code (npm)
+    # Claude Code (native installer via curl)
     info "󰧑 Checking Claude Code"
     if command_exists claude; then
         ok "Already installed"
     else
-        info " Installing Claude Code via npm..."
-        if command_exists npm; then
-            npm install -g @anthropic-ai/claude-code
-        else
-            fail "npm not found - install Node.js first, then run: npm install -g @anthropic-ai/claude-code"
-        fi
+        info " Installing Claude Code via native installer..."
+        curl -fsSL https://claude.ai/install.sh | bash || \
+            warn "Claude Code install failed - run manually: curl -fsSL https://claude.ai/install.sh | bash"
     fi
 
     # MCP Servers (npm)
