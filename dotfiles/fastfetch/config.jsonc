@@ -1,0 +1,59 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+  "logo": {
+    // ASCII version (colored with ANSI codes). To go back to the image:
+    //   "source": "~/.config/fastfetch/logo.png", "type": "kitty-direct", "width": 30
+    "source": "~/.config/fastfetch/logo.txt",
+    "type": "file-raw",
+    "padding": { "top": 3, "left": 2, "right": 3 }
+  },
+
+  // Palette (matches logo.txt):
+  //   copper 38;2;195;137;102 · white 38;2;240;240;240 · grey 38;2;170;170;170
+  "display": {
+    "separator": "  ",
+    "key": { "width": 11 },
+    "color": {
+      "keys": "38;2;195;137;102",
+      "output": "38;2;240;240;240",
+      "separator": "38;2;170;170;170"
+    }
+  },
+
+  "modules": [
+    // Three blank lines so the info starts level with the top of the shield
+    "break",
+    "break",
+    "break",
+    {
+      "type": "title",
+      "color": { "user": "1;38;2;240;240;240", "at": "38;2;170;170;170", "host": "1;38;2;195;137;102" }
+    },
+    { "type": "separator", "string": "─", "outputColor": "38;2;195;137;102" },
+
+    { "type": "custom", "format": "S Y S T E M", "outputColor": "38;2;170;170;170" },
+    { "type": "os",       "key": "OS" },
+    { "type": "host",     "key": "Host" },
+    { "type": "packages", "key": "Packages" },
+    { "type": "shell",    "key": "Shell" },
+    "break",
+
+    { "type": "custom", "format": "H A R D W A R E", "outputColor": "38;2;170;170;170" },
+    { "type": "cpu",     "key": "CPU", "showPeCoreCount": true },
+    { "type": "gpu",     "key": "GPU", "format": "{name} ({core-count} cores)" },
+    // Static specs only: totals, not usage (live stats live in btop)
+    { "type": "memory",  "key": "Memory", "format": "{total}" },
+    { "type": "disk",    "key": "Disk", "folders": "/", "format": "{size-total}" },
+    { "type": "display", "key": "Display", "format": "{width}x{height} @ {refresh-rate} Hz, {inch}\"" },
+    "break",
+
+    { "type": "custom", "format": "E N V I R O N M E N T", "outputColor": "38;2;170;170;170" },
+    { "type": "terminal",     "key": "Terminal" },
+    { "type": "terminalfont", "key": "Font" },
+    { "type": "locale",       "key": "Locale" },
+    { "type": "localip",      "key": "Local IP" },
+    "break",
+
+    { "type": "colors", "symbol": "circle" }
+  ]
+}

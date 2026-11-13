@@ -353,6 +353,19 @@ config_terminal() {
         ok "Copied btop.conf to ~/.config/btop/"
     fi
 
+    # fastfetch config (Westport Horizon ASCII logo + styled info; logo.png is the image fallback)
+    info " Installing fastfetch config"
+    mkdir -p "$HOME/.config/fastfetch"
+    if [ -f "$HOME/.config/fastfetch/config.jsonc" ]; then
+        if prompt_overwrite "~/.config/fastfetch/config.jsonc"; then
+            cp "$SCRIPT_DIR/dotfiles/fastfetch/"{config.jsonc,logo.txt,logo.png} "$HOME/.config/fastfetch/"
+            ok "Copied fastfetch config and logo to ~/.config/fastfetch/"
+        fi
+    else
+        cp "$SCRIPT_DIR/dotfiles/fastfetch/"{config.jsonc,logo.txt,logo.png} "$HOME/.config/fastfetch/"
+        ok "Copied fastfetch config and logo to ~/.config/fastfetch/"
+    fi
+
     # Skitty-notes (Neovim sticky notes via linkarzu/dotfiles-latest)
     info " Installing skitty-notes (neobean Neovim config)"
     if [ -d "$HOME/.config/linkarzu/dotfiles-latest" ]; then

@@ -26,6 +26,7 @@ macOS setup automation for data engineering tools. Installs CLI tools, desktop a
 - `aerospace.toml` - AeroSpace tiling window manager config
 - `dotfiles/starship.toml` - Starship prompt config
 - `dotfiles/ghostty/config` - Ghostty/cmux terminal config
+- `dotfiles/fastfetch/` - fastfetch config, ASCII logo and image logo (installed by `config_terminal()`)
 - `dotfiles/.zshrc` - Zsh shell config
 - `CLAUDE.md` - Project context for Claude Code
 

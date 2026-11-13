@@ -284,6 +284,10 @@ data-dev-tools/
 ├── dotfiles/
 │   ├── .zshrc                # Zsh shell config
 │   ├── starship.toml         # Starship prompt config
+│   ├── fastfetch/
+│   │   ├── config.jsonc      # fastfetch layout and colors
+│   │   ├── logo.txt          # Colored ASCII logo (default)
+│   │   └── logo.png          # Image logo (optional fallback)
 │   └── ghostty/
 │       └── config            # Ghostty/cmux terminal config
 ├── aerospace.toml            # AeroSpace tiling window manager config
