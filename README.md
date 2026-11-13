@@ -299,9 +299,10 @@ data-dev-tools/
 
 1. Parses CLI arguments: group names and `--install`/`--config` flags
 2. Installs **Xcode Command Line Tools** and **Homebrew** (always, as prerequisites)
-3. For each selected group, runs the install and/or config function
-4. Each install function runs `brew bundle` with its group Brewfile, plus any non-Homebrew installs
-5. The `config` group handles **macOS preferences**, **AeroSpace**, **Starship**, **Ghostty**, and **zsh** configs
+3. Trusts the third-party tap formulae this repo installs (`brew trust`) — Homebrew 6+ ignores untrusted taps
+4. For each selected group, runs the install and/or config function
+5. Each install function runs `brew bundle` with its group Brewfile, plus any non-Homebrew installs
+6. The `config` group handles **macOS preferences**, **AeroSpace**, **Starship**, **Ghostty**, and **zsh** configs
 
 ## Requirements
 
