@@ -96,6 +96,10 @@ cask "logitech-g-hub"              # Logitech G Hub
 cask "openlogi"                    # Local-first Logitech Options+ alternative (HID++)
 cask "obsidian"                    # Obsidian note-taking
 cask "telegram"                    # Telegram messaging
+brew "ffmpeg"                       # Audio/video conversion and processing CLI
+# VMware Fusion (free, runs Windows 11 ARM VMs) has no Homebrew cask: Broadcom
+# gates the download behind a login. Install manually from the Broadcom Support
+# Portal: https://support.broadcom.com (My Downloads > VMware Fusion)
 
 # Mac App Store (requires `mas` CLI)
 brew "mas"                          # Mac App Store CLI
